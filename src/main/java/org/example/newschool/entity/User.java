@@ -19,7 +19,7 @@ public class User {
     private String password;
 
     @Column(length = 50, nullable = false)
-    private String nickname = "新用户";
+    private String nickname = " ";
 
     @Column(length = 512, nullable = false)
     private String avatarUrl = "/default_avatar.png";

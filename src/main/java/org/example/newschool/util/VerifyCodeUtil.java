@@ -36,11 +36,13 @@ public class VerifyCodeUtil {
      * 校验验证码（可用作帐号登录、注册、修改信息等业务）
      * 思路：先检查redis中是否有key位对应email的键值对，没有代表验证码过期；如果有就判断用户输入的验证码与value是否相同，进而判断验证码是否正确。
      */
-    public Integer checkVerifyCode(String email, String code) {
+    public Integer checkVerifyCode(String email, String code,String type) {
         int result = 1;
         ValueOperations<String, String> valueOperations = stringRedisTemplate.opsForValue();
-        String msgKey = "msg_" + email;
-        String verifyCode = valueOperations.get(msgKey);
+        // 根据场景类型动态生成Redis键名
+        String key = "verify_" + type + "_" + email; // 例如：verify_register_xxx@qq.com
+
+        String verifyCode = valueOperations.get(key);
         /*校验验证码：0验证码错误、1验证码正确、2验证码过期*/
         if (verifyCode == null) {
             result = 2;
@@ -49,7 +51,7 @@ public class VerifyCodeUtil {
         }
         // 如果验证码正确，则从redis删除
         if (result == 1) {
-            stringRedisTemplate.delete(msgKey);
+            stringRedisTemplate.delete(key);
         }
         return result;
     }
