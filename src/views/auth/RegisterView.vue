@@ -10,7 +10,7 @@
         <el-form class="register-form">
           <el-form-item>
             <el-input
-                v-model="registerForm.userEmail"
+                v-model="registerForm.email"
                 placeholder="请输入邮箱"
                 :prefix-icon="Message"
                 size="large"
@@ -20,7 +20,7 @@
 
           <el-form-item>
             <el-input
-                v-model="registerForm.userName"
+                v-model="registerForm.nickname"
                 placeholder="设置用户名"
                 :prefix-icon="User"
                 size="large"
@@ -30,7 +30,7 @@
 
           <el-form-item>
             <el-input
-                v-model="registerForm.userPassword"
+                v-model="registerForm.password"
                 type="password"
                 placeholder="设置密码"
                 :prefix-icon="Lock"
@@ -42,7 +42,7 @@
 
           <div class="code-wrapper">
             <el-input
-                v-model="registerForm.userCode"
+                v-model="registerForm.code"
                 placeholder="验证码"
                 :prefix-icon="Key"
                 size="large"
@@ -100,10 +100,10 @@ import { AuthAPI } from '@/api/auth'
 const router = useRouter()
 
 const registerForm = reactive({
-  userEmail: '',
-  userName: '',
-  userPassword: '',
-  userCode: ''
+  email: '',
+  nickname: '',
+  password: '',
+  code: ''
 })
 
 const registerError = ref<string | null>(null)
@@ -126,13 +126,13 @@ const startCountdown = () => {
 
 // 发送验证码
 const sendCode = async () => {
-  if (!registerForm.userEmail) {
+  if (!registerForm.email) {
     registerError.value = '请输入邮箱地址'
     return
   }
 
   try {
-    await AuthAPI.sendCode(registerForm.userEmail)
+    await AuthAPI.sendCode(registerForm.email, 'register')
     startCountdown()
   } catch (error: any) {
     registerError.value = error.message || '验证码发送失败'
@@ -144,10 +144,10 @@ const sendCode = async () => {
 const handleRegister = async () => {
   try {
     await AuthAPI.register({
-      userEmail: registerForm.userEmail,
-      userCode: registerForm.userCode,
-      userName: registerForm.userName,
-      userPassword: registerForm.userPassword
+      email: registerForm.email,
+      code: registerForm.code,
+      nickname: registerForm.nickname,
+      password: registerForm.password
     })
 
     // 注册成功后跳转登录

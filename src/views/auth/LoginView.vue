@@ -10,7 +10,7 @@
         <el-form class="login-form">
           <el-form-item>
             <el-input
-                v-model="loginForm.userEmail"
+                v-model="loginForm.email"
                 placeholder="请输入邮箱"
                 :prefix-icon="Message"
                 size="large"
@@ -20,7 +20,7 @@
 
           <el-form-item>
             <el-input
-                v-model="loginForm.userPassword"
+                v-model="loginForm.password"
                 type="password"
                 placeholder="请输入密码"
                 :prefix-icon="Lock"
@@ -50,7 +50,7 @@
               <i class="el-icon-user"></i>
               注册新账号
             </el-link>
-            <el-link type="primary" class="forget-pwd">
+            <el-link type="primary" class="forget-pwd"@click.prevent="gotoResetPassword">
               <i class="el-icon-key"></i>
               忘记密码
             </el-link>
@@ -76,9 +76,14 @@ import { AuthAPI } from '@/api/auth'
 const router = useRouter()
 const userStore = useUserStore()
 
+// 在gotoRegister方法后添加
+const gotoResetPassword = () => {
+  router.push('/reset-password')
+}
+
 const loginForm=reactive({
-  userEmail: '',  // 字段名与后端DTO一致
-  userPassword: ''
+  email: '',  // 字段名与后端DTO一致
+  password: ''
 })
 
 const loginError = ref<string | null>(null)
@@ -86,24 +91,28 @@ const loginError = ref<string | null>(null)
 const handleLogin = async () => {
   try {
     const response = await AuthAPI.login({
-      userEmail: loginForm.userEmail,
-      userPassword: loginForm.userPassword
+      email: loginForm.email,
+      password: loginForm.password
     });
 
     console.log('Response:', response); // 添加日志以调试
 
-    const { data } = response;
-
-    if (!data || !data.data || !data.data.user) {
+    // 修正解构逻辑
+    const backendData = response.data;  // Axios的响应数据在data属性中
+    if (!backendData?.data?.user) {     // 检查user对象是否存在
       throw new Error('用户信息缺失');
+    }
+
+    // 直接解构user对象
+    const { nickname, token } = backendData.data.user;
+    if (!nickname || !token) {
+      throw new Error('用户信息不完整');
     }
 
     // 保存用户信息和token
     userStore.login({
-      userName: data.data.user.userName,
-      userEmail: data.data.user.userEmail || '', // 确保从后端返回的数据中获取 userEmail
-      avatar: data.data.user.avatar || '', // 根据实际接口返回补充，默认为空字符串
-      token: data.data.token
+      nickname: nickname,
+      token: token
     });
 
     // 跳转到首页

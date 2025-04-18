@@ -63,7 +63,7 @@
       <el-dropdown v-else>
       <span class="user-info">
         <el-avatar :size="30" :src="userStore.userInfo?.avatar" />
-        {{ userStore.userInfo?.name }}
+        {{ userStore.userInfo?.nickname }}
       </span>
         <template #dropdown>
           <el-dropdown-menu>

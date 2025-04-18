@@ -3,8 +3,8 @@ import service from './index';
 export const AuthAPI = {
     // 用户登录接口修正
     login: (data: {
-        userEmail: string;  // 根据后端 DTO 字段名修改
-        userPassword: string;
+        email: string;  // 根据后端 DTO 字段名修改
+        password: string;
     }) => service.request({
         url: '/user/login',
         method: 'post',
@@ -16,21 +16,32 @@ export const AuthAPI = {
 
     // 注册接口参数修正
     register: (data: {
-        userEmail: string;
-        userCode: string;
-        userName: string;
-        userPassword: string;
+        email: string;
+        code: string;
+        nickname: string;
+        password: string;
     }) => service.request({
-        url: '/user/regist',
+        url: '/user/register',
         method: 'post',
         data
     }),
 
     // 验证码接口参数修正
-    sendCode: (userEmail: string) => service.request({
-        url: '/user/sendVerificationCode',
+    sendCode: (email: string, type?: string) => service.request({
+        url: '/user/sendCode',
         method: 'get',
-        params: { email: userEmail } // 参数名与后端@RequestParam一致
+        params: { email,type } // 参数名与后端@RequestParam一致
+    }),
+
+    // 找回密码
+    resetPassword: (data: {
+        email: string;
+        code: string;
+        password: string;
+    }) => service.request({
+        url: '/user/resetPassword',
+        method: 'post',
+        data
     })
 
 };

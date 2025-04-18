@@ -3,9 +3,7 @@ import { defineStore } from 'pinia';
 
 // 定义 userInfo 的类型
 interface UserInfo {
-    userName: string;  // 与后端VO字段一致
-    userEmail: string;
-    avatar?: string; // 将 avatar 定义为可选字段
+    nickname: string;  // 与后端VO字段一致
     token: string;
 }
 
