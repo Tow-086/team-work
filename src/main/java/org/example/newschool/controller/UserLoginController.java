@@ -1,17 +1,20 @@
 package org.example.newschool.controller;
 
-import com.sun.xml.bind.v2.TODO;
 import lombok.extern.slf4j.Slf4j;
 import org.example.newschool.dto.ResetPasswordDTO;
 import org.example.newschool.dto.UserLoginDTO;
 import org.example.newschool.entity.User;
 import org.example.newschool.result.Result;
 import org.example.newschool.service.UserLoginService;
+import org.example.newschool.util.JwtUtil;
 import org.example.newschool.vo.UserRegisterV0;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.example.newschool.dto.UserRegisterDTO; // 导入UserRegisterDTO类
+
+import java.util.HashMap;
+import java.util.Map;
 
 //TODO  看注释
 /*
@@ -54,12 +57,25 @@ public class UserLoginController {
     //用户登录
     //懒得写loginvo了就用registervo了
     @PostMapping("/login")
-    public Result<UserRegisterV0> login(@RequestBody UserLoginDTO userLoginDTO) {
+    public Result<Map<String, Object>> login(@RequestBody UserLoginDTO userLoginDTO) {
         log.info("用户登录:  {}", userLoginDTO);
         User user = userLoginService.login(userLoginDTO);
         UserRegisterV0 userRegisterV0 = new UserRegisterV0();
         userRegisterV0.setNickname(user.getNickname());
-        return Result.success(userRegisterV0);
+
+        //弄个Token
+        //生成JWT token
+        // 生成JWT Token
+        String token = JwtUtil.generateToken(user.getId());
+        //构建返回对象
+        Map<String, Object> userData = new HashMap<>();
+        userData.put("token", token);
+        userData.put("nickname", userRegisterV0.getNickname());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("user", userData);
+
+        return Result.success(response);
     }
 
 

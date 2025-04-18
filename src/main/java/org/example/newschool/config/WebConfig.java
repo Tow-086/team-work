@@ -10,7 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         // 允许 localhost:63342 的跨域请求
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:63342") // 允许的前端地址
+                .allowedOrigins("http://localhost:5173") // 允许的前端地址
                 .allowedMethods("GET", "POST", "PUT", "DELETE") // 允许的方法
                 .allowedHeaders("*") // 允许的请求头
                 .allowCredentials(true); // 是否允许凭证

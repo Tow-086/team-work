@@ -22,4 +22,5 @@ public class BrowseHistory {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date viewedAt;
+
 }
