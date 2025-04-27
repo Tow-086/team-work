@@ -50,7 +50,7 @@
               <i class="el-icon-user"></i>
               注册新账号
             </el-link>
-            <el-link type="primary" class="forget-pwd"@click.prevent="gotoResetPassword">
+            <el-link type="primary" class="forget-pwd" @click.prevent="gotoResetPassword">
               <i class="el-icon-key"></i>
               忘记密码
             </el-link>
@@ -67,22 +67,21 @@
 </template>
 
 <script setup lang="ts">
-import {reactive, ref} from 'vue'
+import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import {User, Lock, Message} from '@element-plus/icons-vue'
+import { User, Lock, Message } from '@element-plus/icons-vue'
 import { useUserStore } from '@/stores/user'
 import { AuthAPI } from '@/api/auth'
 
 const router = useRouter()
 const userStore = useUserStore()
 
-// 在gotoRegister方法后添加
 const gotoResetPassword = () => {
   router.push('/reset-password')
 }
 
-const loginForm=reactive({
-  email: '',  // 字段名与后端DTO一致
+const loginForm = reactive({
+  email: '',
   password: ''
 })
 
@@ -97,33 +96,27 @@ const handleLogin = async () => {
 
     console.log('Response:', response); // 添加日志以调试
 
-    // 修正解构逻辑
-    const backendData = response.data;  // Axios的响应数据在data属性中
-    if (!backendData?.data?.user) {     // 检查user对象是否存在
+    const backendData = response.data;
+    if (!backendData?.data?.user) {
       throw new Error('用户信息缺失');
     }
 
-    // 直接解构user对象
     const { nickname, token } = backendData.data.user;
     if (!nickname || !token) {
       throw new Error('用户信息不完整');
     }
 
-    // 保存用户信息和token
     userStore.login({
       nickname: nickname,
       token: token
     });
 
-    // 跳转到首页
-    router.push('/');
+    router.push('/'); // 登录成功后跳转到首页
   } catch (error: any) {
     loginError.value = error.message || '登录失败，请检查输入';
     setTimeout(() => loginError.value = null, 3000);
   }
 }
-
-
 
 const gotoRegister = () => {
   router.push('/register')

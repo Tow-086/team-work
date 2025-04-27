@@ -10,6 +10,7 @@
         mode="horizontal"
         :default-active="activeIndex"
         class="nav-menu"
+        router
     >
       <!-- 学校概况 -->
       <el-sub-menu index="1">
@@ -31,12 +32,22 @@
       </el-sub-menu>
 
       <!-- 校园论坛 -->
-      <el-sub-menu index="5">
-        <template #title>校园论坛</template>
-        <el-menu-item index="5-1">校园新鲜事</el-menu-item>
-        <el-menu-item index="5-2">学习交流</el-menu-item>
-        <el-menu-item index="5-3">生活互助</el-menu-item>
-      </el-sub-menu>
+      <!-- 直接通过 index 属性指定路径 -->
+      <el-menu-item
+          index="talk"
+          class="el-menu-item"
+          @click="handleForumClick"
+      >
+        校园论坛
+      </el-menu-item>
+
+
+      <!--      <el-sub-menu index="5">-->
+<!--        <template #title>校园论坛</template>-->
+<!--        <el-menu-item index="5-1">校园新鲜事</el-menu-item>-->
+<!--        <el-menu-item index="5-2">学习交流</el-menu-item>-->
+<!--        <el-menu-item index="5-3">生活互助</el-menu-item>-->
+<!--      </el-sub-menu>-->
     </el-menu>
 
     <!-- 搜索栏（向左调整后的样式） -->
@@ -99,13 +110,20 @@ const handleSearch = () => {
   }
 }
 
+const handleForumClick = () => {
+  router.push('/talk')
+}
+
+
 // 登录/注册相关
 const handleLogin = () => {
   console.log('触发登录/注册功能')
-  // 实际登录/注册逻辑
-  // 例如：跳转到登录页面
   router.push('/login')
 }
+
+// const handleForumClick = () => {
+//   router.push('/talk')
+// }
 
 </script>
 
