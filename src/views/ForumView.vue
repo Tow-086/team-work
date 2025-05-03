@@ -29,6 +29,14 @@ import PostList from '@/components/forum/PostList.vue'
 import HotTopics from '@/components/forum/HotTopics.vue'
 import ActiveUsers from '@/components/forum/ActiveUsers.vue'
 import CreatePostButton from '@/components/forum/CreatePostButton.vue'
+import { onMounted } from 'vue'
+import { useForumStore } from '@/stores/forum'
+
+const forumStore = useForumStore()
+
+onMounted(() => {
+  forumStore.fetchPosts()
+})
 </script>
 
 <style scoped>

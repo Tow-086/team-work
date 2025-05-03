@@ -11,11 +11,16 @@
 
 <script setup lang="ts">
 import { Plus } from '@element-plus/icons-vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const handleCreate = () => {
-  // 打开发帖弹窗逻辑
+  router.push('/posts/create') // 使用命名路由跳转
 }
 </script>
+
+<!-- 样式保持不变 -->
 
 <style scoped>
 .float-button {

@@ -53,19 +53,22 @@ const routes = [
         meta: { requiresAuth: false }
     },
 
-
-    // 论坛布局（必须保留 children）
     {
         path: '/talk',
+        component: () => import('@/layouts/ForumLayout.vue'), // 使用论坛布局
+    },
+    {
+        path: '/posts/create',
+        name: 'PostCreate',
+        component: () => import('@/views/PostCreateView.vue')
+    },
+    {
+        path: '/talk/postList',
         name: 'Forum',
-        component: () => import('@/layouts/ForumLayout.vue'),
-        meta: { requiresAuth: false },
-        // children: [{
-        //     path: '',
-        //     component: () => import('@/views/ForumView.vue')
-        // }]
+        component: () => import('@/views/PostListView.vue') // 默认子路由
     }
-    // router/index.js 需添加路由配置
+
+
 
 
 ]

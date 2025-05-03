@@ -1,76 +1,59 @@
 import { defineStore } from 'pinia'
-import { fetchPosts, createPost } from '@/api/forum'
-
-interface Post {
-    id: number
-    title: string
-    content: string
-    author: string
-    tags: string[]
-    likes: number
-    comments: number
-    createdAt: string
-}
-
-interface ForumFilter {
-    sortBy: 'latest' | 'hot'
-    tags: string[]
-}
+import { ElMessage } from 'element-plus'
+import { fetchPosts as apiFetchPosts, createPost } from '@/api/forum'
+import type { Post, PostListData } from '@/types/forum'
 
 export const useForumStore = defineStore('forum', {
     state: () => ({
         posts: [] as Post[],
-        currentFilter: {
-            sortBy: 'latest',
-            tags: []
-        } as ForumFilter
+        loading: false,
+        error: null as string | null
     }),
-
-    getters: {
-        filteredPosts(state): Post[] {
-            return [...state.posts].sort((a, b) => {
-                if (state.currentFilter.sortBy === 'hot') {
-                    return b.likes - a.likes
-                }
-                return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-            })
-        }
-    },
 
     actions: {
         async fetchPosts() {
+            this.loading = true
             try {
-                this.posts = await fetchPosts()
+
+                const postListData = await apiFetchPosts({ page: 1, size: 10 })
+                console.log('处理后的帖子数据:', this.posts)
+                // 显式字段映射
+                this.posts = postListData.list.map(post => ({
+                    id: post.id,
+                    title: post.title,
+                    content: post.content,
+                    section: post.section,
+                    tags: post.tags || [],
+                    images: post.images || [],
+                    likes: post.likeCount || 0, // 映射后端字段 likeCount -> likes
+                    comments: post.comments || 0,
+                    views: post.views || 0,
+                    author: post.author || '匿名用户', // 添加默认值
+                    createdAt: post.createdAt
+                }))
             } catch (error) {
-                console.error('获取帖子失败:', error)
+                this.error = '加载失败'
+                ElMessage.error(this.error)
+            } finally {
+                this.loading = false
             }
         },
 
-        async createNewPost(postData: { title: string; content: string }) {
-            const newPost = await createPost(postData)
-            this.posts.unshift(newPost)
-        },
+        async createNewPost(formData: FormData) {
+            console.log('createPost:', createPost)
 
-        applyFilter(filter: ForumFilter) {
-            this.currentFilter = filter
+            this.loading = true
+            try {
+                const response = await createPost(formData)
+                if (response.code === 201) {
+                    this.posts.unshift(response.data)
+                    return response.data
+                }
+            } catch (error) {
+                throw error
+            } finally {
+                this.loading = false
+            }
         }
-    },
-
-    // 添加分页状态
-    state: () => ({
-        currentPage: 1,
-        pageSize: 10,
-        totalPosts: 0
-    }),
-
-// 添加分页action
-    async loadPosts(page = 1) {
-        this.currentPage = page
-        const { data } = await fetchPosts({
-            page,
-            size: this.pageSize
-        })
-        this.posts = data.list
-        this.totalPosts = data.total
     }
 })
