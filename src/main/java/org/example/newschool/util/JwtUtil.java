@@ -18,4 +18,18 @@ public class JwtUtil {
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
     }
+
+    public static Integer getUserIdFromToken(String authorization) {
+        String token = authorization.substring("Bearer ".length());
+        try {
+            String subject = Jwts.parser()
+                    .setSigningKey(SECRET_KEY)
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .getSubject();
+            return Integer.parseInt(subject);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

@@ -34,4 +34,7 @@ public class Post {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
+    @Column(length = 500, nullable = false)
+    private String section;
 }
