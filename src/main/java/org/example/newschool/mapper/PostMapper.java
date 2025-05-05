@@ -2,10 +2,9 @@
 package org.example.newschool.mapper;
 
 import io.lettuce.core.dynamic.annotation.Param;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.type.StringTypeHandler;
+import org.example.newschool.dto.PostResponseDTO;
 import org.example.newschool.entity.Post;
 
 import java.util.List;
@@ -23,4 +22,23 @@ public interface PostMapper {
 
     @Select("SELECT COUNT(*) FROM posts WHERE status = 1")
     int countPosts();
+
+
+        @Update("UPDATE posts SET views = views + 1 WHERE id = #{id}")
+        void incrementViews(Integer id);
+
+
+
+    // PostMapper.java
+    @Select("SELECT p.*, u.nickname AS nickname, u.avatar_url AS avatarUrl " +
+            "FROM posts p " +
+            "LEFT JOIN users u ON p.user_id = u.id " +
+            "WHERE p.id = #{id}")
+    @Results({
+            @Result(property = "nickname", column = "nickname"),
+            @Result(property = "avatarUrl", column = "avatarUrl"),
+            @Result(property = "comments", column = "id",
+                    many = @Many(select = "org.example.newschool.mapper.CommentMapper.findByPostId"))
+    })
+    PostResponseDTO findPostWithComments(Integer id);
 }

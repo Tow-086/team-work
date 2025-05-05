@@ -3,11 +3,13 @@ package org.example.newschool.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.newschool.dto.PostCreateDTO;
+import org.example.newschool.dto.PostResponseDTO;
 import org.example.newschool.entity.Post;
 import org.example.newschool.result.PageResult;
 import org.example.newschool.result.Result;
 import org.example.newschool.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,8 +47,15 @@ public class PostController {
     @GetMapping("")
     public PageResult<Post> getPosts(
             @RequestParam(defaultValue = "1") int page,
-            @RequestParam(defaultValue = "10") int size
+            @RequestParam(defaultValue = "100") int size
     ) {
         return postService.getPosts(page, size);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PostResponseDTO> getPost(@PathVariable Integer id) {
+        postService.incrementViews(id);
+        return ResponseEntity.ok(postService.getPostById(id));
+    }
+
 }

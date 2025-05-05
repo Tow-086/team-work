@@ -2,9 +2,13 @@
 package org.example.newschool.service.serviceImpl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.newschool.dto.CommentDTO;
 import org.example.newschool.dto.PostCreateDTO;
+import org.example.newschool.dto.PostResponseDTO;
 import org.example.newschool.entity.Post;
 import org.example.newschool.entity.User;
+import org.example.newschool.exception.AccountException;
+import org.example.newschool.mapper.CommentMapper;
 import org.example.newschool.mapper.PostMapper;
 import org.example.newschool.result.PageResult;
 import org.example.newschool.service.PostService;
@@ -16,6 +20,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +32,8 @@ public class PostServiceImpl implements PostService {
     private PostMapper postMapper;
     @Autowired
     private FileStorageUtil fileStorageUtil;
+    @Autowired
+    private CommentMapper commentMapper;
 
     @Override
     public Post createPost(PostCreateDTO postCreateDTO) {
@@ -65,5 +73,33 @@ public class PostServiceImpl implements PostService {
         int total = postMapper.countPosts();
 
         return new PageResult<>(total, page, size, posts);
+    }
+
+//    @Override
+//    public Post getPostById(Integer id) {
+//        return postMapper.findPostById(id);
+//    }
+
+    // PostServiceImpl.java
+    @Override
+    @Transactional
+// PostServiceImpl.java
+    public PostResponseDTO getPostById(Integer id) {
+        PostResponseDTO post = postMapper.findPostWithComments(id);
+        if (post == null) throw new AccountException("帖子不存在");
+
+        // 处理空值
+        if (post.getNickname() == null) {
+            post.setNickname("匿名用户");
+        }
+        if (post.getAvatarUrl() == null) {
+            post.setAvatarUrl("/default_avatar.png");
+        }
+        return post;
+    }
+
+    @Override
+    public void incrementViews(Integer id) {
+        postMapper.incrementViews(id);
     }
 }
