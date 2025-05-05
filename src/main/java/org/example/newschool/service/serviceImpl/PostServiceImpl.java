@@ -9,6 +9,7 @@ import org.example.newschool.entity.Post;
 import org.example.newschool.entity.User;
 import org.example.newschool.exception.AccountException;
 import org.example.newschool.mapper.CommentMapper;
+import org.example.newschool.mapper.LikeMapper;
 import org.example.newschool.mapper.PostMapper;
 import org.example.newschool.result.PageResult;
 import org.example.newschool.service.PostService;
@@ -34,7 +35,8 @@ public class PostServiceImpl implements PostService {
     private FileStorageUtil fileStorageUtil;
     @Autowired
     private CommentMapper commentMapper;
-
+    @Autowired
+    private LikeMapper likeMapper;
     @Override
     public Post createPost(PostCreateDTO postCreateDTO) {
         // 1. 获取当前用户ID
@@ -101,5 +103,19 @@ public class PostServiceImpl implements PostService {
     @Override
     public void incrementViews(Integer id) {
         postMapper.incrementViews(id);
+    }
+
+    @Override
+    @Transactional
+    public void toggleLike(Integer postId, Integer userId) {
+        boolean isLiked = likeMapper.existsLike(userId, postId);
+
+        if (isLiked) {
+            likeMapper.deleteLike(userId, postId);
+            postMapper.updateLikeCount(postId, -1); // 减少点赞数
+        } else {
+            likeMapper.insertLike(userId, postId);
+            postMapper.updateLikeCount(postId, 1); // 增加点赞数
+        }
     }
 }

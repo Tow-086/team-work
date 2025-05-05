@@ -8,11 +8,15 @@ import org.example.newschool.entity.Post;
 import org.example.newschool.result.PageResult;
 import org.example.newschool.result.Result;
 import org.example.newschool.service.PostService;
+import org.example.newschool.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Slf4j
@@ -56,6 +60,15 @@ public class PostController {
     public ResponseEntity<PostResponseDTO> getPost(@PathVariable Integer id) {
         postService.incrementViews(id);
         return ResponseEntity.ok(postService.getPostById(id));
+    }
+
+    @PostMapping("/{id}/like")
+    public ResponseEntity<String> toggleLike(@PathVariable Integer id) {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        Integer userId = JwtUtil.getUserIdFromToken(request.getHeader("Authorization"));
+
+        postService.toggleLike(id, userId);
+        return ResponseEntity.ok("操作成功");
     }
 
 }

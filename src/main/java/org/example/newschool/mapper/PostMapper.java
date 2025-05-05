@@ -37,8 +37,12 @@ public interface PostMapper {
     @Results({
             @Result(property = "nickname", column = "nickname"),
             @Result(property = "avatarUrl", column = "avatarUrl"),
+            @Result(property = "id", column = "id"),
             @Result(property = "comments", column = "id",
                     many = @Many(select = "org.example.newschool.mapper.CommentMapper.findByPostId"))
     })
     PostResponseDTO findPostWithComments(Integer id);
+
+    @Update("UPDATE posts SET like_count = like_count + #{increment} WHERE id = #{postId}")
+    void updateLikeCount(@Param("postId") Integer postId, @Param("increment") int increment);
 }

@@ -13,4 +13,6 @@ public interface PostService {
 
     PostResponseDTO getPostById(Integer id);
     void incrementViews(Integer id);
+
+    void toggleLike(Integer postId, Integer userId);
 }
