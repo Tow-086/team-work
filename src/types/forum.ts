@@ -14,6 +14,7 @@ export interface Post {
     updatedAt: string
     userId: number |  null
     commentsList?: Comment[]
+    isLiked?: boolean
 }
 
 export interface ApiResponse<T> {

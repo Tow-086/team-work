@@ -36,11 +36,20 @@
     <div class="action-bar flex gap-4 mb-6">
       <el-button type="info" :icon="View">{{ post.views }} 阅读</el-button>
       <el-button type="primary" :icon="ChatDotRound">{{ post.comments }} 评论</el-button>
-      <el-button type="warning" :icon="Star">{{ post.likeCount }} 点赞</el-button>
+
+      <!-- 修改后的点赞按钮 -->
+      <!-- 修改后的点赞按钮 -->
+      <PostActions
+          :post-id="post.id!"
+          :like-count="post.likeCount"
+          :is-liked="post.isLiked || false"
+          @update:like-count="val => post.likeCount = val"
+          @update:is-liked="val => post.isLiked = val"
+      />
+
     </div>
 
     <!-- 评论区 -->
-    <!-- PostDetail.vue -->
     <div class="comment-section">
       <h3 class="text-xl font-semibold mb-4">评论（{{ post.comments }}）</h3>
       <div v-if="!post.commentsList || post.commentsList.length === 0" class="text-gray-500">
@@ -57,10 +66,11 @@
 </template>
 
 <script setup lang="ts">
-import { View, ChatDotRound, Star } from '@element-plus/icons-vue'
+import { View, ChatDotRound } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
 import PostComment from './PostComment.vue'
-import type {Post} from "@/types/forum.ts";
+import PostActions from './PostActions.vue'
+import type { Post } from "@/types/forum.ts"
 
 const router = useRouter()
 const props = defineProps<{
