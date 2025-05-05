@@ -10,7 +10,7 @@
       <div class="post-header">
         <h3 class="post-title">{{ post.title }}</h3>
         <div class="post-meta">
-          <span class="author">{{ post.author }}</span>  <!-- [!code focus] -->
+          <span class="author">{{ post.nickname }}</span>  <!-- [!code focus] -->
           <span class="time">{{ formatDate(post.createdAt) }}</span>
         </div>
       </div>
@@ -28,9 +28,9 @@
           <el-icon><ChatDotRound /></el-icon>
           <span>{{ post.comments || 0 }}</span>
           <el-icon><Star /></el-icon>
-          <span>{{ post.likes || 0 }}</span>
+          <span>{{ post.likeCount || 0 }}</span>
         </div>
-        <el-button type="primary" size="small" @click="navigateToDetail(post.id)">
+        <el-button type="primary" size="small" @click="navigateToDetail(post.id!)">
           查看详情
         </el-button>
       </div>
@@ -58,7 +58,7 @@ const truncateContent = (content: string) => {
 
 // 跳转详情页
 const navigateToDetail = (postId: number) => {
-  router.push(`/post/${postId}`)
+  router.push(`/posts/${postId}`)
 }
 </script>
 

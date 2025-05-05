@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia'
 import { ElMessage } from 'element-plus'
-import { fetchPosts as apiFetchPosts, createPost } from '@/api/forum'
+import { fetchPosts as apiFetchPosts, createPost, fetchPostById } from '@/api/forum' // 新增引入
 import type { Post, PostListData } from '@/types/forum'
 
 export const useForumStore = defineStore('forum', {
     state: () => ({
         posts: [] as Post[],
+        post: null as Post | null,
         loading: false,
         error: null as string | null
     }),
@@ -14,22 +15,22 @@ export const useForumStore = defineStore('forum', {
         async fetchPosts() {
             this.loading = true
             try {
-
-                const postListData = await apiFetchPosts({ page: 1, size: 10 })
-                console.log('处理后的帖子数据:', this.posts)
-                // 显式字段映射
-                this.posts = postListData.list.map(post => ({
+                const response = await apiFetchPosts({ page: 1, size: 100 })
+                this.posts = response.list.map(post => ({
                     id: post.id,
                     title: post.title,
                     content: post.content,
                     section: post.section,
                     tags: post.tags || [],
                     images: post.images || [],
-                    likes: post.likeCount || 0, // 映射后端字段 likeCount -> likes
+                    likes: post.likeCount || 0,
                     comments: post.comments || 0,
                     views: post.views || 0,
-                    author: post.author || '匿名用户', // 添加默认值
-                    createdAt: post.createdAt
+                    nickname: post.nickname || '匿名用户', // [!code focus]
+                    avatarUrl: post.avatarUrl || '/default_avatar.png', // [!code focus]
+                    userId: post.userId,
+                    createdAt: post.createdAt,
+                    updatedAt: post.updatedAt
                 }))
             } catch (error) {
                 this.error = '加载失败'
@@ -40,8 +41,6 @@ export const useForumStore = defineStore('forum', {
         },
 
         async createNewPost(formData: FormData) {
-            console.log('createPost:', createPost)
-
             this.loading = true
             try {
                 const response = await createPost(formData)
@@ -53,6 +52,19 @@ export const useForumStore = defineStore('forum', {
                 throw error
             } finally {
                 this.loading = false
+            }
+        },
+
+        async fetchPostById(id: number) {
+            this.loading = true;
+            try {
+                const postData = await fetchPostById(id); // 直接获取Post对象
+                this.post = postData;
+            } catch (error) {
+                console.error('加载帖子失败:', error);
+                ElMessage.error('加载帖子详情失败');
+            } finally {
+                this.loading = false;
             }
         }
     }

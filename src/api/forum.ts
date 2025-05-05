@@ -25,3 +25,12 @@ export const createPost = async (
         throw new Error('创建帖子失败: ' + (error as Error).message)
     }
 }
+// 获取单个帖子
+export const fetchPostById = async (id: number): Promise<Post> => {
+    try {
+        const response = await service.get(`/posts/${id}`)
+        return response.data
+    } catch (error) {
+        throw new Error('获取帖子详情失败: ' + (error as Error).message)
+    }
+}

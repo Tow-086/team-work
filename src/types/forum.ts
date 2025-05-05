@@ -1,18 +1,19 @@
 export interface Post {
-    id: number
+    id: number | null
     title: string
     content: string
     section: string
     tags: string[]
     images: string[]
     views: number
-    likes: number
+    likeCount: number
     comments: number
-    author: string
-    authorAvatar: string
+    nickname: string
+    avatarUrl: string
     createdAt: string
     updatedAt: string
     userId: number |  null
+    commentsList?: Comment[]
 }
 
 export interface ApiResponse<T> {
@@ -36,6 +37,8 @@ export interface Comment {
     userId: number
     postId: number
     createdAt: string
+    nickname?: string    // 新增
+    avatarUrl?: string   // 新增
 }
 
 export interface Pagination {

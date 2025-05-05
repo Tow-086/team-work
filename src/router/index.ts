@@ -66,7 +66,14 @@ const routes = [
         path: '/talk/postList',
         name: 'Forum',
         component: () => import('@/views/PostListView.vue') // 默认子路由
+    },
+
+    {
+        path: '/posts/:id',
+        name: 'PostDetail',
+        component: () => import('@/views/PostDetailView.vue')
     }
+
 
 
 
