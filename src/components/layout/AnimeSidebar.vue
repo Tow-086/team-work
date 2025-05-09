@@ -1,18 +1,22 @@
 <!-- src/components/layout/AnimeSidebar.vue -->
 <template>
   <div class="anime-sidebar">
+    <!-- 头部添加霓虹光效 -->
     <div class="anime-header">
-      <h3>🎮 动漫空间</h3>
+      <h3 class="neon-text">🎮 动漫空间</h3>
       <div class="decorative-line"></div>
     </div>
 
     <!-- 动漫角色展示 -->
-    <div class="character-card">
-      <img
+    <div class="character-card glow-card">
+      <div class="image-wrapper">
+        <img
           src='@/assets/images/logo.jpg'
           alt="动漫角色"
           class="character-image"
-      />
+        />
+        <div class="overlay-light"></div>
+      </div>
       <div class="character-info">
         <div class="character-name">校园守护精灵</div>
         <div class="character-desc">今日运势：大吉</div>
@@ -20,7 +24,7 @@
     </div>
 
     <!-- 热门话题 -->
-    <div class="hot-topics">
+    <div class="hot-topics particle-bg">
       <div class="topic-item" v-for="topic in topics" :key="topic.id">
         <span class="topic-tag">🔥 {{ topic.tag }}</span>
         <span class="topic-title">{{ topic.title }}</span>
@@ -40,6 +44,45 @@ const topics = ref([
 </script>
 
 <style scoped>
+
+/* 霓虹文字效果 */
+.neon-text {
+  text-shadow: 0 0 8px #ff6b6b, 0 0 10px #ff9f43;
+}
+
+/* 悬浮光效卡片 */
+.glow-card {
+  position: relative;
+  transition: 0.3s;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    background: linear-gradient(45deg, #ff9f43, #ff6b6b);
+    z-index: -1;
+    opacity: 0;
+    transition: 0.3s;
+  }
+  &:hover::before {
+    opacity: 0.3;
+    filter: blur(12px);
+  }
+}
+
+/* 粒子背景 */
+.particle-bg {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('data:image/svg+xml,...');
+    opacity: 0.1;
+    pointer-events: none;
+  }
+}
+
 .anime-sidebar {
   position: relative;
   min-height: 600px;

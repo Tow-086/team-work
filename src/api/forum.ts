@@ -3,9 +3,14 @@ import type { Post, ApiResponse, PostListData } from '@/types/forum'
 import { fetchPosts as apiFetchPosts, createPost } from '@/api/forum'
 
 export const fetchPosts = async (
-    params: { page: number; size: number }
+    params: {section?:section; page: number; size: number }
 ): Promise<PostListData> => {
-    const response = await service.get('/posts', { params })
+    const response = await service.get('/posts', {
+        params:{
+            section: params.section,
+            page: params.page,
+            size: params.size
+        } })
     console.log('API原始数据:', response.data) // 先获取响应再打印
     return response.data
 }

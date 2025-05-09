@@ -12,10 +12,10 @@ export const useForumStore = defineStore('forum', {
     }),
 
     actions: {
-        async fetchPosts() {
+        async fetchPosts(section?: string) {
             this.loading = true
             try {
-                const response = await apiFetchPosts({ page: 1, size: 100 })
+                const response = await apiFetchPosts({section:section, page: 1, size: 100 })
                 this.posts = response.list.map(post => ({
                     id: post.id,
                     title: post.title,

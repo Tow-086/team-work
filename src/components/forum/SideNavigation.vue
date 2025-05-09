@@ -2,12 +2,12 @@
 <template>
   <div class="side-navigation">
     <!-- 板块导航树 -->
-    <div class="section">
-      <h3 class="section-title">≡ 讨论板块</h3>
-      <div class="nav-item">○ 校园新鲜事</div>
-      <div class="nav-item">○ 学习交流</div>
-      <div class="nav-item">○ 生活互助</div>
-    </div>
+<!--    <div class="section">-->
+<!--      <h3 class="section-title">≡ 讨论板块</h3>-->
+<!--      <div class="nav-item">○ 校园新鲜事</div>-->
+<!--      <div class="nav-item">○ 学习交流</div>-->
+<!--      <div class="nav-item">○ 生活互助</div>-->
+<!--    </div>-->
 
     <!-- 过滤条件 -->
     <div class="section filter-section">

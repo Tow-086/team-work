@@ -18,11 +18,14 @@
 import { useForumStore } from '@/stores/forum'
 import PostList from '@/components/forum/PostList.vue'
 import { onMounted } from 'vue'
+import {useRoute} from "vue-router";
 
 const forumStore = useForumStore()
+const route = useRoute()
 
 onMounted(() => {
-  forumStore.fetchPosts()
+  const section = route.query.section as string |  undefined
+  forumStore.fetchPosts(section)
 })
 </script>
 
