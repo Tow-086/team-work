@@ -17,11 +17,11 @@ public interface PostMapper {
     void insertPost(Post post);
 
     // PostMapper.java
-    @Select("SELECT * FROM posts WHERE status = 1 ORDER BY created_at DESC LIMIT #{size} OFFSET #{offset}")
-    List<Post> findPostsByPage(@Param("offset") int offset, @Param("size") int size);
+//    @Select("SELECT * FROM posts WHERE status = 1 ORDER BY created_at DESC LIMIT #{size} OFFSET #{offset}")
+//    List<Post> findPostsByPage(@Param("offset") int offset, @Param("size") int size);
 
-    @Select("SELECT COUNT(*) FROM posts WHERE status = 1")
-    int countPosts();
+//    @Select("SELECT COUNT(*) FROM posts WHERE status = 1")
+//    int countPosts();
 
 
         @Update("UPDATE posts SET views = views + 1 WHERE id = #{id}")
@@ -45,4 +45,23 @@ public interface PostMapper {
 
     @Update("UPDATE posts SET like_count = like_count + #{increment} WHERE id = #{postId}")
     void updateLikeCount(@Param("postId") Integer postId, @Param("increment") int increment);
+
+    @Select("<script>" +
+            "SELECT * FROM posts " +
+            "WHERE status = 1 " +
+            "<if test='section != null'> AND section = #{section} </if>" +
+            "ORDER BY created_at DESC " +
+            "LIMIT #{size} OFFSET #{offset}" +
+            "</script>")
+    List<Post> findPostsByPage(
+            @Param("section") String section,
+            @Param("offset") int offset,
+            @Param("size") int size);
+
+    @Select("<script>" +
+            "SELECT COUNT(*) FROM posts " +
+            "WHERE status = 1 " +
+            "<if test='section != null'> AND section = #{section} </if>" +
+            "</script>")
+    int countPosts(@Param("section") String section);
 }

@@ -69,11 +69,10 @@ public class PostServiceImpl implements PostService {
 
 
     @Override
-    public PageResult<Post> getPosts(int page, int size) {
+    public PageResult<Post> getPosts(String section, int page, int size) {
         int offset = (page - 1) * size;
-        List<Post> posts = postMapper.findPostsByPage(offset, size);
-        int total = postMapper.countPosts();
-
+        List<Post> posts = postMapper.findPostsByPage(section, offset, size); // 修改传参
+        int total = postMapper.countPosts(section); // 新增带参数的统计
         return new PageResult<>(total, page, size, posts);
     }
 

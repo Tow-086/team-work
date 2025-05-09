@@ -9,7 +9,7 @@ import org.example.newschool.result.PageResult;
 public interface PostService {
     Post createPost(PostCreateDTO postCreateDTO);
 
-    PageResult<Post> getPosts(int page, int size);
+    PageResult<Post> getPosts(String section,int page, int size);
 
     PostResponseDTO getPostById(Integer id);
     void incrementViews(Integer id);

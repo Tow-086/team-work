@@ -50,10 +50,12 @@ public class PostController {
     // PostController.java
     @GetMapping("")
     public PageResult<Post> getPosts(
+            @RequestParam(required = false) String section,
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "100") int size
     ) {
-        return postService.getPosts(page, size);
+        log.info("获取帖子列表: section={}, page={}, size={}", section, page, size);
+        return postService.getPosts(section,page, size);
     }
 
     @GetMapping("/{id}")
@@ -68,7 +70,10 @@ public class PostController {
         Integer userId = JwtUtil.getUserIdFromToken(request.getHeader("Authorization"));
 
         postService.toggleLike(id, userId);
-        return ResponseEntity.ok("操作成功");
+        return ResponseEntity.ok("点赞操作成功");
     }
+
+
+
 
 }
