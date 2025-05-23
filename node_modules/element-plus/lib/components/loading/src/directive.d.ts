@@ -9,5 +9,5 @@ export interface ElementLoading extends HTMLElement {
         options: LoadingOptions;
     };
 }
-export declare const vLoading: Directive<ElementLoading, LoadingBinding>;
-export {};
+declare const vLoading: Directive<ElementLoading, LoadingBinding>;
+export default vLoading;

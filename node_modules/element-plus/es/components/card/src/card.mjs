@@ -13,7 +13,9 @@ const cardProps = buildProps({
     type: definePropType([String, Object, Array]),
     default: ""
   },
+  headerClass: String,
   bodyClass: String,
+  footerClass: String,
   shadow: {
     type: String,
     values: ["always", "hover", "never"],

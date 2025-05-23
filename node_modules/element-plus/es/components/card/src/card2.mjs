@@ -17,7 +17,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }, [
         _ctx.$slots.header || _ctx.header ? (openBlock(), createElementBlock("div", {
           key: 0,
-          class: normalizeClass(unref(ns).e("header"))
+          class: normalizeClass([unref(ns).e("header"), _ctx.headerClass])
         }, [
           renderSlot(_ctx.$slots, "header", {}, () => [
             createTextVNode(toDisplayString(_ctx.header), 1)
@@ -31,7 +31,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         ], 6),
         _ctx.$slots.footer || _ctx.footer ? (openBlock(), createElementBlock("div", {
           key: 1,
-          class: normalizeClass(unref(ns).e("footer"))
+          class: normalizeClass([unref(ns).e("footer"), _ctx.footerClass])
         }, [
           renderSlot(_ctx.$slots, "footer", {}, () => [
             createTextVNode(toDisplayString(_ctx.footer), 1)

@@ -1,4 +1,4 @@
-import { uploadListTypes } from './upload.mjs';
+import { uploadListTypes } from './upload2.mjs';
 import { buildProps, definePropType } from '../../../utils/vue/props/runtime.mjs';
 import { mutable } from '../../../utils/typescript.mjs';
 import { NOOP } from '@vue/shared';

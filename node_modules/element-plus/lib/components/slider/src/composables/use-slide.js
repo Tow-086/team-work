@@ -124,7 +124,10 @@ const useSlide = (props, initData, emit) => {
   const onSliderMarkerDown = (position) => {
     if (sliderDisabled.value || initData.dragging)
       return;
-    setPosition(position);
+    const buttonRef = setPosition(position);
+    if (buttonRef) {
+      emitChange();
+    }
   };
   return {
     elFormItem,

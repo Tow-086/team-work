@@ -1,6 +1,6 @@
 import type { ShallowRef } from 'vue';
 import type { UploadContentInstance } from './upload-content';
-import type { UploadFile, UploadFiles, UploadProps, UploadRawFile, UploadStatus } from './upload';
+import type { UploadFile, UploadProps, UploadRawFile, UploadStatus } from './upload';
 export declare const useHandlers: (props: UploadProps, uploadRef: ShallowRef<UploadContentInstance | undefined>) => {
     /** @description two-way binding ref from props `fileList` */
     uploadFiles: import("vue").Ref<{
@@ -13,6 +13,7 @@ export declare const useHandlers: (props: UploadProps, uploadRef: ShallowRef<Upl
         url?: string | undefined;
         raw?: {
             uid: number;
+            isDirectory?: boolean | undefined;
             readonly lastModified: number;
             readonly name: string;
             readonly webkitRelativePath: string;
@@ -23,7 +24,7 @@ export declare const useHandlers: (props: UploadProps, uploadRef: ShallowRef<Upl
             stream: () => ReadableStream<Uint8Array>;
             text: () => Promise<string>;
         } | undefined;
-    }[]> | import("vue").WritableComputedRef<UploadFiles>;
+    }[]>;
     abort: (file: UploadFile) => void;
     clearFiles: (states?: UploadStatus[]) => void;
     handleError: (err: import("./ajax").UploadAjaxError, rawFile: UploadRawFile) => void;

@@ -8,7 +8,7 @@ declare const _default: import("vue").DefineComponent<{
      */
     disabled: BooleanConstructor;
 }, {
-    groupRef: import("vue").Ref<null>;
+    groupRef: import("vue").Ref<HTMLElement | undefined>;
     visible: import("vue").ComputedRef<boolean>;
     ns: {
         namespace: import("vue").ComputedRef<string>;

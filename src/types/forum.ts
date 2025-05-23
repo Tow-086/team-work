@@ -30,16 +30,17 @@ export interface PostListData {
     pageSize: number
 }
 
-export interface Comment {
+export interface IComment {
     id: number
     content: string
     parentId: number | null
-    likes: number
+    likeCount: number
     userId: number
     postId: number
     createdAt: string
     nickname?: string    // 新增
     avatarUrl?: string   // 新增
+    children?: IComment[] // 新增树形结构支持
 }
 
 export interface Pagination {

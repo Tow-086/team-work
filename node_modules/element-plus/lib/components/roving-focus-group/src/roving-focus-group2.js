@@ -2,34 +2,38 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var vue = require('vue');
-var rovingFocusGroupImpl = require('./roving-focus-group-impl.js');
-var rovingFocusGroup = require('./roving-focus-group.js');
-var pluginVue_exportHelper = require('../../../_virtual/plugin-vue_export-helper.js');
+var collection = require('../../collection/src/collection.js');
+var runtime = require('../../../utils/vue/props/runtime.js');
 
-const _sfc_main = vue.defineComponent({
-  name: "ElRovingFocusGroup",
-  components: {
-    ElFocusGroupCollection: rovingFocusGroup.ElCollection,
-    ElRovingFocusGroupImpl: rovingFocusGroupImpl["default"]
-  }
+const rovingFocusGroupProps = runtime.buildProps({
+  style: { type: runtime.definePropType([String, Array, Object]) },
+  currentTabId: {
+    type: runtime.definePropType(String)
+  },
+  defaultCurrentTabId: String,
+  loop: Boolean,
+  dir: {
+    type: String,
+    values: ["ltr", "rtl"],
+    default: "ltr"
+  },
+  orientation: {
+    type: runtime.definePropType(String)
+  },
+  onBlur: Function,
+  onFocus: Function,
+  onMousedown: Function
 });
-function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_el_roving_focus_group_impl = vue.resolveComponent("el-roving-focus-group-impl");
-  const _component_el_focus_group_collection = vue.resolveComponent("el-focus-group-collection");
-  return vue.openBlock(), vue.createBlock(_component_el_focus_group_collection, null, {
-    default: vue.withCtx(() => [
-      vue.createVNode(_component_el_roving_focus_group_impl, vue.normalizeProps(vue.guardReactiveProps(_ctx.$attrs)), {
-        default: vue.withCtx(() => [
-          vue.renderSlot(_ctx.$slots, "default")
-        ]),
-        _: 3
-      }, 16)
-    ]),
-    _: 3
-  });
-}
-var ElRovingFocusGroup = /* @__PURE__ */ pluginVue_exportHelper["default"](_sfc_main, [["render", _sfc_render], ["__file", "roving-focus-group.vue"]]);
+const {
+  ElCollection,
+  ElCollectionItem,
+  COLLECTION_INJECTION_KEY,
+  COLLECTION_ITEM_INJECTION_KEY
+} = collection.createCollectionWithScope("RovingFocusGroup");
 
-exports["default"] = ElRovingFocusGroup;
+exports.ElCollection = ElCollection;
+exports.ElCollectionItem = ElCollectionItem;
+exports.ROVING_FOCUS_COLLECTION_INJECTION_KEY = COLLECTION_INJECTION_KEY;
+exports.ROVING_FOCUS_ITEM_COLLECTION_INJECTION_KEY = COLLECTION_ITEM_INJECTION_KEY;
+exports.rovingFocusGroupProps = rovingFocusGroupProps;
 //# sourceMappingURL=roving-focus-group2.js.map

@@ -31,7 +31,7 @@ declare const _default: import("vue").DefineComponent<{
     "onSet-picker-option"?: ((...args: any[]) => any) | undefined;
 }, {
     readonly visible: boolean;
-    readonly actualVisible: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
     readonly format: string;
+    readonly actualVisible: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
 }>;
 export default _default;

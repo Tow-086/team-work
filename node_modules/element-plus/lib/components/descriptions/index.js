@@ -2,9 +2,9 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var description$1 = require('./src/description2.js');
+var description$1 = require('./src/description.js');
 var descriptionItem = require('./src/description-item.js');
-var description = require('./src/description.js');
+var description = require('./src/description2.js');
 var install = require('../../utils/vue/install.js');
 
 const ElDescriptions = install.withInstall(description$1["default"], {

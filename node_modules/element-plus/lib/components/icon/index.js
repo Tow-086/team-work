@@ -2,8 +2,8 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var icon$1 = require('./src/icon2.js');
-var icon = require('./src/icon.js');
+var icon$1 = require('./src/icon.js');
+var icon = require('./src/icon2.js');
 var install = require('../../utils/vue/install.js');
 
 const ElIcon = install.withInstall(icon$1["default"]);

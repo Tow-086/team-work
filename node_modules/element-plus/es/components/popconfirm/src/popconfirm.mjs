@@ -2,7 +2,7 @@ import { QuestionFilled } from '@element-plus/icons-vue';
 import { buttonTypes } from '../../button/src/button.mjs';
 import { buildProps } from '../../../utils/vue/props/runtime.mjs';
 import { iconPropType } from '../../../utils/vue/icon.mjs';
-import { useTooltipContentProps } from '../../tooltip/src/content2.mjs';
+import { useTooltipContentProps } from '../../tooltip/src/content.mjs';
 
 const popconfirmProps = buildProps({
   title: String,

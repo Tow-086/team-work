@@ -8,7 +8,7 @@ const DEFAULT_ARROW_OFFSET = 0;
 const usePopperContent = (props) => {
   const { popperInstanceRef, contentRef, triggerRef, role } = inject(POPPER_INJECTION_KEY, void 0);
   const arrowRef = ref();
-  const arrowOffset = ref();
+  const arrowOffset = computed(() => props.arrowOffset);
   const eventListenerModifier = computed(() => {
     return {
       name: "eventListeners",
@@ -41,7 +41,9 @@ const usePopperContent = (props) => {
   });
   const computedReference = computed(() => unwrapMeasurableEl(props.referenceEl) || unref(triggerRef));
   const { attributes, state, styles, update, forceUpdate, instanceRef } = usePopper(computedReference, contentRef, options);
-  watch(instanceRef, (instance) => popperInstanceRef.value = instance);
+  watch(instanceRef, (instance) => popperInstanceRef.value = instance, {
+    flush: "sync"
+  });
   onMounted(() => {
     watch(() => {
       var _a;

@@ -20,7 +20,7 @@ const Loading = function(options = {}) {
       if (resolved.fullscreen)
         fullscreenInstance = void 0;
     }
-  });
+  }, Loading._context);
   addStyle(resolved, resolved.parent, instance);
   addClassList(resolved, resolved.parent, instance);
   resolved.parent.vLoadingAddClassList = () => addClassList(resolved, resolved.parent, instance);
@@ -99,6 +99,7 @@ const addClassList = (options, parent, instance) => {
     removeClass(parent, ns.bm("parent", "hidden"));
   }
 };
+Loading._context = null;
 
-export { Loading };
+export { Loading as default };
 //# sourceMappingURL=service.mjs.map

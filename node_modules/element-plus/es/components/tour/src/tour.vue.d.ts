@@ -26,11 +26,11 @@ declare const __VLS_component: import("vue").DefineComponent<{
     mask: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => boolean | {
         style?: import("vue").CSSProperties;
         color?: string;
-    }) | (() => import("element-plus/es/element-plus/index.js").TourMask) | ((new (...args: any[]) => boolean | {
+    }) | (() => import("element-plus").TourMask) | ((new (...args: any[]) => boolean | {
         style?: import("vue").CSSProperties;
         color?: string;
-    }) | (() => import("element-plus/es/element-plus/index.js").TourMask))[], unknown, unknown, boolean, boolean>;
-    gap: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => import("element-plus/es/element-plus/index.js").TourGap) | (() => import("element-plus/es/element-plus/index.js").TourGap) | ((new (...args: any[]) => import("element-plus/es/element-plus/index.js").TourGap) | (() => import("element-plus/es/element-plus/index.js").TourGap))[], unknown, unknown, () => {
+    }) | (() => import("element-plus").TourMask))[], unknown, unknown, boolean, boolean>;
+    gap: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => import("element-plus").TourGap) | (() => import("element-plus").TourGap) | ((new (...args: any[]) => import("element-plus").TourGap) | (() => import("element-plus").TourGap))[], unknown, unknown, () => {
         offset: number;
         radius: number;
     }, boolean>;
@@ -49,7 +49,7 @@ declare const __VLS_component: import("vue").DefineComponent<{
         readonly validator: ((val: unknown) => boolean) | undefined;
         __epPropKey: true;
     };
-    appendTo: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => string | HTMLElement) | (() => string | HTMLElement) | ((new (...args: any[]) => string | HTMLElement) | (() => string | HTMLElement))[], unknown, unknown, string, boolean>;
+    appendTo: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => string | HTMLElement) | (() => import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => string | HTMLElement) | (() => string | HTMLElement) | ((new (...args: any[]) => string | HTMLElement) | (() => string | HTMLElement))[], unknown, unknown>) | ((new (...args: any[]) => string | HTMLElement) | (() => import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => string | HTMLElement) | (() => string | HTMLElement) | ((new (...args: any[]) => string | HTMLElement) | (() => string | HTMLElement))[], unknown, unknown>))[], unknown, unknown, string, boolean>;
     closeOnPressEscape: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, boolean, boolean>;
     targetAreaClickable: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, boolean, boolean>;
 }, {}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {
@@ -79,11 +79,11 @@ declare const __VLS_component: import("vue").DefineComponent<{
     mask: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => boolean | {
         style?: import("vue").CSSProperties;
         color?: string;
-    }) | (() => import("element-plus/es/element-plus/index.js").TourMask) | ((new (...args: any[]) => boolean | {
+    }) | (() => import("element-plus").TourMask) | ((new (...args: any[]) => boolean | {
         style?: import("vue").CSSProperties;
         color?: string;
-    }) | (() => import("element-plus/es/element-plus/index.js").TourMask))[], unknown, unknown, boolean, boolean>;
-    gap: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => import("element-plus/es/element-plus/index.js").TourGap) | (() => import("element-plus/es/element-plus/index.js").TourGap) | ((new (...args: any[]) => import("element-plus/es/element-plus/index.js").TourGap) | (() => import("element-plus/es/element-plus/index.js").TourGap))[], unknown, unknown, () => {
+    }) | (() => import("element-plus").TourMask))[], unknown, unknown, boolean, boolean>;
+    gap: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => import("element-plus").TourGap) | (() => import("element-plus").TourGap) | ((new (...args: any[]) => import("element-plus").TourGap) | (() => import("element-plus").TourGap))[], unknown, unknown, () => {
         offset: number;
         radius: number;
     }, boolean>;
@@ -102,7 +102,7 @@ declare const __VLS_component: import("vue").DefineComponent<{
         readonly validator: ((val: unknown) => boolean) | undefined;
         __epPropKey: true;
     };
-    appendTo: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => string | HTMLElement) | (() => string | HTMLElement) | ((new (...args: any[]) => string | HTMLElement) | (() => string | HTMLElement))[], unknown, unknown, string, boolean>;
+    appendTo: import("element-plus/es/utils").EpPropFinalized<(new (...args: any[]) => string | HTMLElement) | (() => import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => string | HTMLElement) | (() => string | HTMLElement) | ((new (...args: any[]) => string | HTMLElement) | (() => string | HTMLElement))[], unknown, unknown>) | ((new (...args: any[]) => string | HTMLElement) | (() => import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => string | HTMLElement) | (() => string | HTMLElement) | ((new (...args: any[]) => string | HTMLElement) | (() => string | HTMLElement))[], unknown, unknown>))[], unknown, unknown, string, boolean>;
     closeOnPressEscape: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, boolean, boolean>;
     targetAreaClickable: import("element-plus/es/utils").EpPropFinalized<BooleanConstructor, unknown, unknown, boolean, boolean>;
 }>> & {
@@ -112,12 +112,12 @@ declare const __VLS_component: import("vue").DefineComponent<{
     onFinish?: (() => any) | undefined;
     "onUpdate:current"?: ((current: number) => any) | undefined;
 }, {
-    mask: import("element-plus/es/element-plus/index.js").TourMask;
-    gap: import("element-plus/es/element-plus/index.js").TourGap;
+    mask: import("element-plus").TourMask;
+    gap: import("element-plus").TourGap;
     modelValue: boolean;
     placement: import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => "top" | "bottom" | "left" | "right" | "top-start" | "top-end" | "bottom-start" | "bottom-end" | "right-start" | "right-end" | "left-start" | "left-end") | (() => import("@floating-ui/core").Placement) | ((new (...args: any[]) => "top" | "bottom" | "left" | "right" | "top-start" | "top-end" | "bottom-start" | "bottom-end" | "right-start" | "right-end" | "left-start" | "left-end") | (() => import("@floating-ui/core").Placement))[], "top" | "bottom" | "left" | "right" | "top-start" | "top-end" | "bottom-start" | "bottom-end" | "right-start" | "right-end" | "left-start" | "left-end", unknown>;
     scrollIntoViewOptions: import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => boolean | ScrollIntoViewOptions) | (() => boolean | ScrollIntoViewOptions) | ((new (...args: any[]) => boolean | ScrollIntoViewOptions) | (() => boolean | ScrollIntoViewOptions))[], unknown, unknown>;
-    appendTo: import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => string | HTMLElement) | (() => string | HTMLElement) | ((new (...args: any[]) => string | HTMLElement) | (() => string | HTMLElement))[], unknown, unknown>;
+    appendTo: import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => string | HTMLElement) | (() => import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => string | HTMLElement) | (() => string | HTMLElement) | ((new (...args: any[]) => string | HTMLElement) | (() => string | HTMLElement))[], unknown, unknown>) | ((new (...args: any[]) => string | HTMLElement) | (() => import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => string | HTMLElement) | (() => string | HTMLElement) | ((new (...args: any[]) => string | HTMLElement) | (() => string | HTMLElement))[], unknown, unknown>))[], unknown, unknown>;
     showArrow: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
     showClose: import("element-plus/es/utils").EpPropMergeType<BooleanConstructor, unknown, unknown>;
     current: number;

@@ -24,6 +24,7 @@ declare const __VLS_component: import("vue").DefineComponent<{
     };
     readonly startPlaceholder: StringConstructor;
     readonly endPlaceholder: StringConstructor;
+    readonly disabled: BooleanConstructor;
 }, {
     focus: () => void;
     blur: () => void;
@@ -59,6 +60,7 @@ declare const __VLS_component: import("vue").DefineComponent<{
     };
     readonly startPlaceholder: StringConstructor;
     readonly endPlaceholder: StringConstructor;
+    readonly disabled: BooleanConstructor;
 }>> & {
     onFocus?: ((...args: any[]) => any) | undefined;
     onBlur?: ((...args: any[]) => any) | undefined;
@@ -70,7 +72,9 @@ declare const __VLS_component: import("vue").DefineComponent<{
     onEndInput?: ((...args: any[]) => any) | undefined;
     onStartChange?: ((...args: any[]) => any) | undefined;
     onEndChange?: ((...args: any[]) => any) | undefined;
-}, {}>;
+}, {
+    readonly disabled: boolean;
+}>;
 declare const _default: __VLS_WithTemplateSlots<typeof __VLS_component, ReturnType<typeof __VLS_template>>;
 export default _default;
 type __VLS_WithTemplateSlots<T, S> = T & {

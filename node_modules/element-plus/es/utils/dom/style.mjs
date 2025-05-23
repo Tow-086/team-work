@@ -1,8 +1,8 @@
 import { isNumber, isStringNumber } from '../types.mjs';
 import { isClient } from '@vueuse/core';
+import { camelize, isObject, isString } from '@vue/shared';
 import { entriesOf, keysOf } from '../objects.mjs';
 import { debugWarn } from '../error.mjs';
-import { camelize, isObject, isString } from '@vue/shared';
 
 const SCOPE = "utils/dom/style";
 const classNameToArray = (cls = "") => cls.split(" ").filter((item) => !!item.trim());

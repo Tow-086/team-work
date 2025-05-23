@@ -4,7 +4,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var vue = require('vue');
 var core = require('@vueuse/core');
-var rovingFocusGroup = require('./roving-focus-group.js');
+var rovingFocusGroup = require('./roving-focus-group2.js');
 var tokens = require('./tokens.js');
 var utils = require('./utils.js');
 var pluginVue_exportHelper = require('../../../_virtual/plugin-vue_export-helper.js');

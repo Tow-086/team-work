@@ -126,7 +126,7 @@ var zhCn = {
       close: "\u5173\u95ED\u6B64\u5BF9\u8BDD\u6846"
     },
     upload: {
-      deleteTip: "\u6309 delete \u952E\u53EF\u5220\u9664",
+      deleteTip: "\u6309 Delete \u952E\u53EF\u5220\u9664",
       delete: "\u5220\u9664",
       preview: "\u67E5\u770B\u56FE\u7247",
       continue: "\u7EE7\u7EED\u4E0A\u4F20"

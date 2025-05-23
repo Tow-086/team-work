@@ -2,8 +2,8 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var progress$1 = require('./src/progress.js');
-var progress = require('./src/progress2.js');
+var progress$1 = require('./src/progress2.js');
+var progress = require('./src/progress.js');
 var install = require('../../utils/vue/install.js');
 
 const ElProgress = install.withInstall(progress$1["default"]);

@@ -2,15 +2,25 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var runtime = require('../../../utils/vue/props/runtime.js');
+var vue = require('vue');
+var teleport = require('./teleport2.js');
+var pluginVue_exportHelper = require('../../../_virtual/plugin-vue_export-helper.js');
 
-const teleportProps = runtime.buildProps({
-  to: {
-    type: runtime.definePropType([String, Object]),
-    required: true
-  },
-  disabled: Boolean
+const _sfc_main = /* @__PURE__ */ vue.defineComponent({
+  __name: "teleport",
+  props: teleport.teleportProps,
+  setup(__props) {
+    return (_ctx, _cache) => {
+      return _ctx.disabled ? vue.renderSlot(_ctx.$slots, "default", { key: 0 }) : (vue.openBlock(), vue.createBlock(vue.Teleport, {
+        key: 1,
+        to: _ctx.to
+      }, [
+        vue.renderSlot(_ctx.$slots, "default")
+      ], 8, ["to"]));
+    };
+  }
 });
+var Teleport = /* @__PURE__ */ pluginVue_exportHelper["default"](_sfc_main, [["__file", "teleport.vue"]]);
 
-exports.teleportProps = teleportProps;
+exports["default"] = Teleport;
 //# sourceMappingURL=teleport.js.map

@@ -8,6 +8,7 @@ var install = require('../../utils/vue/install.js');
 
 const ElSegmented = install.withInstall(segmented$1["default"]);
 
+exports.defaultProps = segmented.defaultProps;
 exports.segmentedEmits = segmented.segmentedEmits;
 exports.segmentedProps = segmented.segmentedProps;
 exports.ElSegmented = ElSegmented;

@@ -5,7 +5,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 var vue = require('vue');
 var lodashUnified = require('lodash-unified');
 var core = require('@vueuse/core');
-var upload = require('./upload.js');
+var upload = require('./upload2.js');
 var error = require('../../../utils/error.js');
 
 const SCOPE = "ElUpload";

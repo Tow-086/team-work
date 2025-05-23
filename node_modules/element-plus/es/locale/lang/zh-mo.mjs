@@ -122,7 +122,7 @@ var zhMo = {
       title: "\u63D0\u793A",
       confirm: "\u78BA\u5B9A",
       cancel: "\u53D6\u6D88",
-      error: "\u8F38\u5165\u7684\u8CC7\u6599\u4E0D\u7B26\u898F\u5B9A!",
+      error: "\u8F38\u5165\u7684\u8CC7\u6599\u4E0D\u7B26\u5408\u898F\u5B9A!",
       close: "\u95DC\u9589\u6B64\u5C0D\u8A71\u6846"
     },
     upload: {

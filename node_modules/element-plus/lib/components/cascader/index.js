@@ -2,8 +2,8 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var cascader$1 = require('./src/cascader2.js');
-var cascader = require('./src/cascader.js');
+var cascader$1 = require('./src/cascader.js');
+var cascader = require('./src/cascader2.js');
 var install = require('../../utils/vue/install.js');
 
 const ElCascader = install.withInstall(cascader$1["default"]);

@@ -2,8 +2,8 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var imageViewer$1 = require('./src/image-viewer2.js');
-var imageViewer = require('./src/image-viewer.js');
+var imageViewer$1 = require('./src/image-viewer.js');
+var imageViewer = require('./src/image-viewer2.js');
 var install = require('../../utils/vue/install.js');
 
 const ElImageViewer = install.withInstall(imageViewer$1["default"]);

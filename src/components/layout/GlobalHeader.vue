@@ -15,35 +15,26 @@
         style="flex-wrap: nowrap; min-width: 0"
     >
       <!-- 学校概况 -->
-      <el-sub-menu
-          index="1"
-          style="min-width: 110px; --el-menu-horizontal-sub-item-height: 56px"
-      >
+      <!-- “学校概况”的二级菜单 -->
+      <el-sub-menu index="1">
         <template #title>学校概况</template>
-        <el-menu-item index="1-1">学校简介</el-menu-item>
-        <el-menu-item index="1-2">历史沿革</el-menu-item>
-        <el-menu-item index="1-3">平原湖校区</el-menu-item>
+        <el-menu-item index="1-1" @click="handleMenuItemClick('/intro')">学校简介</el-menu-item>
+        <el-menu-item index="1-2" @click="handleMenuItemClick('/history')">历史沿革</el-menu-item>
+        <el-menu-item index="1-3" @click="handleMenuItemClick('/Pinyuan')">平原湖校区</el-menu-item>
       </el-sub-menu>
 
-      <el-menu-item
-          index="2"
-          style="min-width: 90px; padding: 0 12px"
-      >软院风采</el-menu-item>
+      <!-- 菜单项“软院风采” -->
+      <el-menu-item index="2" @click="handleMenuItemClick('/fengcai')">软院风采</el-menu-item>
 
-      <el-menu-item
-          index="3"
-          style="min-width: 90px; padding: 0 12px"
-      >社团建设</el-menu-item>
+      <!-- 菜单项“社团建设” -->
+      <el-menu-item index="3" @click="handleMenuItemClick('/Shetuan')">社团建设</el-menu-item>
 
-      <!-- 新生答疑 -->
-      <el-sub-menu
-          index="4"
-          style="min-width: 110px; --el-menu-horizontal-sub-item-height: 56px"
-      >
-        <template #title>新生答疑</template>
-        <el-menu-item index="4-1">入学答疑</el-menu-item>
+      <!-- “新生答疑论坛”的二级菜单 -->
+      <el-sub-menu index="4">
+        <template #title>新生答疑论坛</template>
+        <el-menu-item index="4-1" @click="handleMenuItemClick('/question')">入学答疑</el-menu-item>
         <el-menu-item index="4-2">常见问题</el-menu-item>
-        <el-menu-item index="4-3">校园地图</el-menu-item>
+        <el-menu-item index="4-3" @click="handleMenuItemClick('/map')">校园地图</el-menu-item>
       </el-sub-menu>
 
       <!-- 校园论坛 -->
@@ -117,6 +108,9 @@ const handleForumClick = () => {
 
 const handleLogin = () => {
   router.push('/login')
+}
+const handleMenuItemClick = (path: string) => {
+  router.push(path)
 }
 </script>
 

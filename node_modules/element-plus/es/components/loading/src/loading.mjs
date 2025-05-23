@@ -2,7 +2,7 @@ import { ref, reactive, defineComponent, h, Transition, withCtx, withDirectives,
 import { useGlobalComponentSettings } from '../../config-provider/src/hooks/use-global-config.mjs';
 import { removeClass } from '../../../utils/dom/style.mjs';
 
-function createLoadingComponent(options) {
+function createLoadingComponent(options, appContext) {
   let afterLeaveTimer;
   const afterLeaveFlag = ref(false);
   const data = reactive({
@@ -102,6 +102,7 @@ function createLoadingComponent(options) {
     }
   });
   const loadingInstance = createApp(elLoadingComponent);
+  Object.assign(loadingInstance._context, appContext != null ? appContext : {});
   const vm = loadingInstance.mount(document.createElement("div"));
   return {
     ...toRefs(data),

@@ -72,9 +72,42 @@ const routes = [
         path: '/posts/:id',
         name: 'PostDetail',
         component: () => import('@/views/PostDetailView.vue')
+    },
+    {
+        path: '/intro',
+        name: 'Intro',
+        component: () => import('@/views/intro/Sintro.vue')
+    },
+    {
+        path: '/history',
+        name: 'History',
+        component: () => import('@/views/intro/history.vue')
+    },
+    {
+        path: '/Pinyuan',
+        name: 'Pinyuan',
+        component: () => import('@/views/intro/Pinyuan.vue')
+    },
+    {
+        path: '/Shetuan',
+        name: 'Shetuan',
+        component: () => import('@/views/shetuan.vue')
+    },
+    {
+        path: '/map',
+        name: 'map',
+        component: () => import('@/views/map.vue')
+    },
+    {
+        path: '/fengcai',
+        name: 'Fengcai',
+        component: () => import('@/views/fengcai.vue')
+    },
+    {
+        path: '/question',
+        name: 'Question',
+        component: () => import('@/views/question.vue')
     }
-
-
 
 
 

@@ -9,7 +9,7 @@ var fr = {
       label: `Fil d'Ariane`
     },
     colorpicker: {
-      confirm: "OK",
+      confirm: "Confirmer",
       clear: "Effacer",
       defaultLabel: "color picker",
       description: "La couleur actuelle est {color}. Appuyer sur Entr\xE9e pour s\xE9lectionner une nouvelle couleur."
@@ -19,7 +19,7 @@ var fr = {
       today: "Auj.",
       cancel: "Annuler",
       clear: "Effacer",
-      confirm: "OK",
+      confirm: "Confirmer",
       dateTablePrompt: "Utiliser les touches fl\xE9ch\xE9es et appuyer sur Entr\xE9e pour s\xE9lectionner le jour du mois",
       monthTablePrompt: "Utiliser les touches fl\xE9ch\xE9es et appuyer sur Entr\xE9e pour s\xE9lectionner le mois",
       yearTablePrompt: "Utiliser les touches fl\xE9ch\xE9es et appuyer sur Entr\xE9e pour s\xE9lectionner l'ann\xE9e",

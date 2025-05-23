@@ -59,8 +59,8 @@ declare const __VLS_component: import("vue").DefineComponent<{
     readonly strokeLinecap: import("element-plus/es/utils").EpPropMergeType<(new (...args: any[]) => "inherit" | "round" | "butt" | "square") | (() => NonNullable<"inherit" | "round" | "butt" | "square" | undefined>) | ((new (...args: any[]) => "inherit" | "round" | "butt" | "square") | (() => NonNullable<"inherit" | "round" | "butt" | "square" | undefined>))[], unknown, unknown>;
     readonly strokeWidth: number;
     readonly type: import("element-plus/es/utils").EpPropMergeType<StringConstructor, "circle" | "line" | "dashboard", unknown>;
-    readonly duration: number;
     readonly format: import("./progress").ProgressFn;
+    readonly duration: number;
     readonly indeterminate: boolean;
     readonly percentage: number;
     readonly status: import("element-plus/es/utils").EpPropMergeType<StringConstructor, "" | "success" | "warning" | "exception", unknown>;

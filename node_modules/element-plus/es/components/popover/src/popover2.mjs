@@ -65,6 +65,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         ref: tooltipRef
       }, _ctx.$attrs, {
         trigger: _ctx.trigger,
+        "trigger-keys": _ctx.triggerKeys,
         placement: _ctx.placement,
         disabled: _ctx.disabled,
         visible: _ctx.visible,
@@ -83,6 +84,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         "popper-class": unref(kls),
         "popper-style": unref(style),
         teleported: _ctx.teleported,
+        "append-to": _ctx.appendTo,
         persistent: _ctx.persistent,
         "gpu-acceleration": unref(gpuAcceleration),
         "onUpdate:visible": unref(onUpdateVisible),
@@ -105,7 +107,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
           _ctx.$slots.reference ? renderSlot(_ctx.$slots, "reference", { key: 0 }) : createCommentVNode("v-if", true)
         ]),
         _: 3
-      }, 16, ["trigger", "placement", "disabled", "visible", "transition", "popper-options", "tabindex", "content", "offset", "show-after", "hide-after", "auto-close", "show-arrow", "aria-label", "effect", "enterable", "popper-class", "popper-style", "teleported", "persistent", "gpu-acceleration", "onUpdate:visible"]);
+      }, 16, ["trigger", "trigger-keys", "placement", "disabled", "visible", "transition", "popper-options", "tabindex", "content", "offset", "show-after", "hide-after", "auto-close", "show-arrow", "aria-label", "effect", "enterable", "popper-class", "popper-style", "teleported", "append-to", "persistent", "gpu-acceleration", "onUpdate:visible"]);
     };
   }
 });

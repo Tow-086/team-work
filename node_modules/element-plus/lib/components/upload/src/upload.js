@@ -2,109 +2,134 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var ajax = require('./ajax.js');
-var runtime = require('../../../utils/vue/props/runtime.js');
-var typescript = require('../../../utils/typescript.js');
-var shared = require('@vue/shared');
+var vue = require('vue');
+var constants = require('./constants.js');
+var uploadList = require('./upload-list2.js');
+var uploadContent = require('./upload-content.js');
+var useHandlers = require('./use-handlers.js');
+var upload = require('./upload2.js');
+var pluginVue_exportHelper = require('../../../_virtual/plugin-vue_export-helper.js');
+var useFormCommonProps = require('../../form/src/hooks/use-form-common-props.js');
 
-const uploadListTypes = ["text", "picture", "picture-card"];
-let fileId = 1;
-const genFileId = () => Date.now() + fileId++;
-const uploadBaseProps = runtime.buildProps({
-  action: {
-    type: String,
-    default: "#"
-  },
-  headers: {
-    type: runtime.definePropType(Object)
-  },
-  method: {
-    type: String,
-    default: "post"
-  },
-  data: {
-    type: runtime.definePropType([Object, Function, Promise]),
-    default: () => typescript.mutable({})
-  },
-  multiple: Boolean,
-  name: {
-    type: String,
-    default: "file"
-  },
-  drag: Boolean,
-  withCredentials: Boolean,
-  showFileList: {
-    type: Boolean,
-    default: true
-  },
-  accept: {
-    type: String,
-    default: ""
-  },
-  fileList: {
-    type: runtime.definePropType(Array),
-    default: () => typescript.mutable([])
-  },
-  autoUpload: {
-    type: Boolean,
-    default: true
-  },
-  listType: {
-    type: String,
-    values: uploadListTypes,
-    default: "text"
-  },
-  httpRequest: {
-    type: runtime.definePropType(Function),
-    default: ajax.ajaxUpload
-  },
-  disabled: Boolean,
-  limit: Number
+const __default__ = vue.defineComponent({
+  name: "ElUpload"
 });
-const uploadProps = runtime.buildProps({
-  ...uploadBaseProps,
-  beforeUpload: {
-    type: runtime.definePropType(Function),
-    default: shared.NOOP
-  },
-  beforeRemove: {
-    type: runtime.definePropType(Function)
-  },
-  onRemove: {
-    type: runtime.definePropType(Function),
-    default: shared.NOOP
-  },
-  onChange: {
-    type: runtime.definePropType(Function),
-    default: shared.NOOP
-  },
-  onPreview: {
-    type: runtime.definePropType(Function),
-    default: shared.NOOP
-  },
-  onSuccess: {
-    type: runtime.definePropType(Function),
-    default: shared.NOOP
-  },
-  onProgress: {
-    type: runtime.definePropType(Function),
-    default: shared.NOOP
-  },
-  onError: {
-    type: runtime.definePropType(Function),
-    default: shared.NOOP
-  },
-  onExceed: {
-    type: runtime.definePropType(Function),
-    default: shared.NOOP
-  },
-  crossorigin: {
-    type: runtime.definePropType(String)
+const _sfc_main = /* @__PURE__ */ vue.defineComponent({
+  ...__default__,
+  props: upload.uploadProps,
+  setup(__props, { expose }) {
+    const props = __props;
+    const disabled = useFormCommonProps.useFormDisabled();
+    const uploadRef = vue.shallowRef();
+    const {
+      abort,
+      submit,
+      clearFiles,
+      uploadFiles,
+      handleStart,
+      handleError,
+      handleRemove,
+      handleSuccess,
+      handleProgress,
+      revokeFileObjectURL
+    } = useHandlers.useHandlers(props, uploadRef);
+    const isPictureCard = vue.computed(() => props.listType === "picture-card");
+    const uploadContentProps = vue.computed(() => ({
+      ...props,
+      fileList: uploadFiles.value,
+      onStart: handleStart,
+      onProgress: handleProgress,
+      onSuccess: handleSuccess,
+      onError: handleError,
+      onRemove: handleRemove
+    }));
+    vue.onBeforeUnmount(() => {
+      uploadFiles.value.forEach(revokeFileObjectURL);
+    });
+    vue.provide(constants.uploadContextKey, {
+      accept: vue.toRef(props, "accept")
+    });
+    expose({
+      abort,
+      submit,
+      clearFiles,
+      handleStart,
+      handleRemove
+    });
+    return (_ctx, _cache) => {
+      return vue.openBlock(), vue.createElementBlock("div", null, [
+        vue.unref(isPictureCard) && _ctx.showFileList ? (vue.openBlock(), vue.createBlock(uploadList["default"], {
+          key: 0,
+          disabled: vue.unref(disabled),
+          "list-type": _ctx.listType,
+          files: vue.unref(uploadFiles),
+          crossorigin: _ctx.crossorigin,
+          "handle-preview": _ctx.onPreview,
+          onRemove: vue.unref(handleRemove)
+        }, vue.createSlots({
+          append: vue.withCtx(() => [
+            vue.createVNode(uploadContent["default"], vue.mergeProps({
+              ref_key: "uploadRef",
+              ref: uploadRef
+            }, vue.unref(uploadContentProps)), {
+              default: vue.withCtx(() => [
+                _ctx.$slots.trigger ? vue.renderSlot(_ctx.$slots, "trigger", { key: 0 }) : vue.createCommentVNode("v-if", true),
+                !_ctx.$slots.trigger && _ctx.$slots.default ? vue.renderSlot(_ctx.$slots, "default", { key: 1 }) : vue.createCommentVNode("v-if", true)
+              ]),
+              _: 3
+            }, 16)
+          ]),
+          _: 2
+        }, [
+          _ctx.$slots.file ? {
+            name: "default",
+            fn: vue.withCtx(({ file, index }) => [
+              vue.renderSlot(_ctx.$slots, "file", {
+                file,
+                index
+              })
+            ])
+          } : void 0
+        ]), 1032, ["disabled", "list-type", "files", "crossorigin", "handle-preview", "onRemove"])) : vue.createCommentVNode("v-if", true),
+        !vue.unref(isPictureCard) || vue.unref(isPictureCard) && !_ctx.showFileList ? (vue.openBlock(), vue.createBlock(uploadContent["default"], vue.mergeProps({
+          key: 1,
+          ref_key: "uploadRef",
+          ref: uploadRef
+        }, vue.unref(uploadContentProps)), {
+          default: vue.withCtx(() => [
+            _ctx.$slots.trigger ? vue.renderSlot(_ctx.$slots, "trigger", { key: 0 }) : vue.createCommentVNode("v-if", true),
+            !_ctx.$slots.trigger && _ctx.$slots.default ? vue.renderSlot(_ctx.$slots, "default", { key: 1 }) : vue.createCommentVNode("v-if", true)
+          ]),
+          _: 3
+        }, 16)) : vue.createCommentVNode("v-if", true),
+        _ctx.$slots.trigger ? vue.renderSlot(_ctx.$slots, "default", { key: 2 }) : vue.createCommentVNode("v-if", true),
+        vue.renderSlot(_ctx.$slots, "tip"),
+        !vue.unref(isPictureCard) && _ctx.showFileList ? (vue.openBlock(), vue.createBlock(uploadList["default"], {
+          key: 3,
+          disabled: vue.unref(disabled),
+          "list-type": _ctx.listType,
+          files: vue.unref(uploadFiles),
+          crossorigin: _ctx.crossorigin,
+          "handle-preview": _ctx.onPreview,
+          onRemove: vue.unref(handleRemove)
+        }, vue.createSlots({
+          _: 2
+        }, [
+          _ctx.$slots.file ? {
+            name: "default",
+            fn: vue.withCtx(({ file, index }) => [
+              vue.renderSlot(_ctx.$slots, "file", {
+                file,
+                index
+              })
+            ])
+          } : void 0
+        ]), 1032, ["disabled", "list-type", "files", "crossorigin", "handle-preview", "onRemove"])) : vue.createCommentVNode("v-if", true)
+      ]);
+    };
   }
 });
+var Upload = /* @__PURE__ */ pluginVue_exportHelper["default"](_sfc_main, [["__file", "upload.vue"]]);
 
-exports.genFileId = genFileId;
-exports.uploadBaseProps = uploadBaseProps;
-exports.uploadListTypes = uploadListTypes;
-exports.uploadProps = uploadProps;
+exports["default"] = Upload;
 //# sourceMappingURL=upload.js.map

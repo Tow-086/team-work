@@ -6,7 +6,7 @@ var vue = require('vue');
 var useGlobalConfig = require('../../config-provider/src/hooks/use-global-config.js');
 var style = require('../../../utils/dom/style.js');
 
-function createLoadingComponent(options) {
+function createLoadingComponent(options, appContext) {
   let afterLeaveTimer;
   const afterLeaveFlag = vue.ref(false);
   const data = vue.reactive({
@@ -106,6 +106,7 @@ function createLoadingComponent(options) {
     }
   });
   const loadingInstance = vue.createApp(elLoadingComponent);
+  Object.assign(loadingInstance._context, appContext != null ? appContext : {});
   const vm = loadingInstance.mount(document.createElement("div"));
   return {
     ...vue.toRefs(data),

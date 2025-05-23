@@ -1,5 +1,6 @@
+import type { AppContext } from 'vue';
 import type { LoadingOptionsResolved } from './types';
-export declare function createLoadingComponent(options: LoadingOptionsResolved): {
+export declare function createLoadingComponent(options: LoadingOptionsResolved, appContext: AppContext | null): {
     setText: (text: string) => void;
     removeElLoadingChild: () => void;
     close: () => void;

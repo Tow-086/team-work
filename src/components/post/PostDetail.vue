@@ -69,13 +69,13 @@
             @update:like-count="val => post.likeCount = val"
             @update:is-liked="val => post.isLiked = val"
         />
-        <el-button
-            type="info"
-            :icon="ChatDotRound"
-            class="action-item"
-        >
-          {{ post.comments }} 条评论
-        </el-button>
+<!--        <el-button-->
+<!--            type="info"-->
+<!--            :icon="ChatDotRound"-->
+<!--            class="action-item"-->
+<!--        >-->
+<!--          {{ post.comments }} 条评论-->
+<!--        </el-button>-->
       </div>
 
       <!-- 评论区 -->
@@ -83,19 +83,35 @@
         <template #header>
           <div class="comment-header">
             <el-icon><ChatLineRound /></el-icon>
-            <span>评论区（{{ post.comments }}）</span>
+            <!-- 添加空值保护 -->
+            <span>评论区（{{ comments ? comments.length : 0 }}）</span>
           </div>
         </template>
 
-        <div v-if="!post.commentsList?.length" class="empty-comment">
-          <el-empty description="暂无评论" :image-size="80" />
+        <!-- 评论输入框 -->
+        <div class="comment-input">
+          <el-input
+              v-model="newComment"
+              type="textarea"
+              :rows="3"
+              placeholder="写下你的评论..."
+              resize="none"
+          />
+          <div class="submit-btn">
+            <el-button
+                type="primary"
+                :loading="isSubmitting"
+                @click="handleSubmitComment"
+            >
+              发表评论
+            </el-button>
+          </div>
         </div>
 
-        <PostComment
-            v-for="comment in post.commentsList"
-            :key="comment.id"
-            :comment="comment"
-            class="comment-item"
+        <!-- 评论列表 -->
+        <CommentList
+            :comments="comments"
+            class="comment-list"
         />
       </el-card>
     </div>
@@ -104,11 +120,22 @@
 
 <script setup lang="ts">
 import { ArrowLeft, Picture, ChatLineRound, ChatDotRound } from '@element-plus/icons-vue'
-import { useRouter } from 'vue-router'
+import {useRoute, useRouter} from 'vue-router'
 import PostComment from './PostComment.vue'
 import PostActions from './PostActions.vue'
 import type { Post } from "@/types/forum.ts"
-
+import { useForumStore } from '@/stores/forum'
+import {ElMessage} from "element-plus";
+// import type { PostComment } from '@/types/forum'
+// 新增导入
+import { ref, computed, onMounted } from 'vue'
+import CommentList from "@/components/post/CommentList.vue";
+const forumStore = useForumStore()
+const newComment = ref('')
+const isSubmitting = ref(false)
+// 获取当前帖子的评论
+const comments = computed(() => forumStore.comments)
+const route = useRoute()
 const router = useRouter()
 const props = defineProps<{
   post: Post
@@ -123,6 +150,40 @@ const formatDate = (dateStr: string) => {
     minute: '2-digit'
   })
 }
+// 提交评论
+const handleSubmitComment = async () => {
+  if (!newComment.value.trim()) {
+    ElMessage.warning('评论内容不能为空')
+    return
+  }
+
+  try {
+    isSubmitting.value = true
+    await forumStore.createComment(props.post.id!, newComment.value.trim())
+    newComment.value = ''
+    ElMessage.success('评论发布成功')
+  } catch (error) {
+    ElMessage.error('评论发布失败')
+  } finally {
+    isSubmitting.value = false
+  }
+}
+
+// 初始化时加载评论
+onMounted(async () => {
+  console.log('传递给 CommentList 的评论数据:', comments.value);
+  try {
+    const postId = Number(route.params.id);
+    if (isNaN(postId)) {
+      ElMessage.error('无效的帖子ID');
+      return;
+    }
+    await forumStore.fetchComments(postId); // 数据解构已在 fetchComments 中完成
+  } catch (error) {
+    console.error('加载评论失败:', error);
+    forumStore.comments = []; // 确保数据重置
+  }
+});
 </script>
 
 <style scoped lang="less">
@@ -362,5 +423,11 @@ const formatDate = (dateStr: string) => {
       }
     }
   }
+}
+
+/* 强制覆盖输入框样式 */
+.comment-input :deep(.el-textarea__inner) {
+  color: var(--el-text-color-primary) !important;
+  background: var(--el-bg-color) !important;
 }
 </style>

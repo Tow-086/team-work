@@ -2,11 +2,11 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var rovingFocusGroup = require('./src/roving-focus-group2.js');
+var rovingFocusGroup = require('./src/roving-focus-group.js');
 var rovingFocusItem = require('./src/roving-focus-item.js');
 var tokens = require('./src/tokens.js');
 var utils = require('./src/utils.js');
-var rovingFocusGroup$1 = require('./src/roving-focus-group.js');
+var rovingFocusGroup$1 = require('./src/roving-focus-group2.js');
 
 
 

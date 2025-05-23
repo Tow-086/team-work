@@ -5,6 +5,11 @@ import { UPDATE_MODEL_EVENT, CHANGE_EVENT } from '../../../constants/event.mjs';
 import { isString } from '@vue/shared';
 import { isNumber, isBoolean } from '../../../utils/types.mjs';
 
+const defaultProps = {
+  label: "label",
+  value: "value",
+  disabled: "disabled"
+};
 const segmentedProps = buildProps({
   direction: {
     type: definePropType(String),
@@ -17,6 +22,10 @@ const segmentedProps = buildProps({
   modelValue: {
     type: [String, Number, Boolean],
     default: void 0
+  },
+  props: {
+    type: definePropType(Object),
+    default: () => defaultProps
   },
   block: Boolean,
   size: useSizeProp,
@@ -34,5 +43,5 @@ const segmentedEmits = {
   [CHANGE_EVENT]: (val) => isString(val) || isNumber(val) || isBoolean(val)
 };
 
-export { segmentedEmits, segmentedProps };
+export { defaultProps, segmentedEmits, segmentedProps };
 //# sourceMappingURL=segmented.mjs.map

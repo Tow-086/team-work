@@ -1,6 +1,5 @@
-import { defineComponent, inject, watch, onBeforeUnmount, openBlock, createElementBlock, normalizeClass, unref, normalizeStyle } from 'vue';
+import { defineComponent, inject, onBeforeUnmount, openBlock, createElementBlock, normalizeClass, unref, normalizeStyle } from 'vue';
 import { POPPER_CONTENT_INJECTION_KEY } from './constants.mjs';
-import { popperArrowProps } from './arrow.mjs';
 import _export_sfc from '../../../_virtual/plugin-vue_export-helper.mjs';
 import { useNamespace } from '../../../hooks/use-namespace/index.mjs';
 
@@ -10,14 +9,9 @@ const __default__ = defineComponent({
 });
 const _sfc_main = /* @__PURE__ */ defineComponent({
   ...__default__,
-  props: popperArrowProps,
   setup(__props, { expose }) {
-    const props = __props;
     const ns = useNamespace("popper");
-    const { arrowOffset, arrowRef, arrowStyle } = inject(POPPER_CONTENT_INJECTION_KEY, void 0);
-    watch(() => props.arrowOffset, (val) => {
-      arrowOffset.value = val;
-    });
+    const { arrowRef, arrowStyle } = inject(POPPER_CONTENT_INJECTION_KEY, void 0);
     onBeforeUnmount(() => {
       arrowRef.value = void 0;
     });

@@ -1,5 +1,5 @@
 import Segmented from './src/segmented2.mjs';
-export { segmentedEmits, segmentedProps } from './src/segmented.mjs';
+export { defaultProps, segmentedEmits, segmentedProps } from './src/segmented.mjs';
 import { withInstall } from '../../utils/vue/install.mjs';
 
 const ElSegmented = withInstall(Segmented);

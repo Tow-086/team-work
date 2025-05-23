@@ -2,8 +2,8 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var col$1 = require('./src/col2.js');
-var col = require('./src/col.js');
+var col$1 = require('./src/col.js');
+var col = require('./src/col2.js');
 var install = require('../../utils/vue/install.js');
 
 const ElCol = install.withInstall(col$1["default"]);

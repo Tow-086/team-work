@@ -4,9 +4,9 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var types = require('../types.js');
 var core = require('@vueuse/core');
+var shared = require('@vue/shared');
 var objects = require('../objects.js');
 var error = require('../error.js');
-var shared = require('@vue/shared');
 
 const SCOPE = "utils/dom/style";
 const classNameToArray = (cls = "") => cls.split(" ").filter((item) => !!item.trim());

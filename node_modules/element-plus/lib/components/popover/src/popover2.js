@@ -69,6 +69,7 @@ const _sfc_main = /* @__PURE__ */ vue.defineComponent({
         ref: tooltipRef
       }, _ctx.$attrs, {
         trigger: _ctx.trigger,
+        "trigger-keys": _ctx.triggerKeys,
         placement: _ctx.placement,
         disabled: _ctx.disabled,
         visible: _ctx.visible,
@@ -87,6 +88,7 @@ const _sfc_main = /* @__PURE__ */ vue.defineComponent({
         "popper-class": vue.unref(kls),
         "popper-style": vue.unref(style$1),
         teleported: _ctx.teleported,
+        "append-to": _ctx.appendTo,
         persistent: _ctx.persistent,
         "gpu-acceleration": vue.unref(gpuAcceleration),
         "onUpdate:visible": vue.unref(onUpdateVisible),
@@ -109,7 +111,7 @@ const _sfc_main = /* @__PURE__ */ vue.defineComponent({
           _ctx.$slots.reference ? vue.renderSlot(_ctx.$slots, "reference", { key: 0 }) : vue.createCommentVNode("v-if", true)
         ]),
         _: 3
-      }, 16, ["trigger", "placement", "disabled", "visible", "transition", "popper-options", "tabindex", "content", "offset", "show-after", "hide-after", "auto-close", "show-arrow", "aria-label", "effect", "enterable", "popper-class", "popper-style", "teleported", "persistent", "gpu-acceleration", "onUpdate:visible"]);
+      }, 16, ["trigger", "trigger-keys", "placement", "disabled", "visible", "transition", "popper-options", "tabindex", "content", "offset", "show-after", "hide-after", "auto-close", "show-arrow", "aria-label", "effect", "enterable", "popper-class", "popper-style", "teleported", "append-to", "persistent", "gpu-acceleration", "onUpdate:visible"]);
     };
   }
 });

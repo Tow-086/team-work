@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia'
 import { ElMessage } from 'element-plus'
-import { fetchPosts as apiFetchPosts, createPost, fetchPostById } from '@/api/forum' // 新增引入
+import { fetchPosts as apiFetchPosts, createPost, fetchPostById,fetchComments,createComment } from '@/api/forum' // 新增引入
 import type { Post, PostListData } from '@/types/forum'
 
 export const useForumStore = defineStore('forum', {
     state: () => ({
         posts: [] as Post[],
         post: null as Post | null,
+        comments: [] as IComment[],
         loading: false,
         error: null as string | null
     }),
@@ -65,6 +66,33 @@ export const useForumStore = defineStore('forum', {
                 ElMessage.error('加载帖子详情失败');
             } finally {
                 this.loading = false;
+            }
+        },
+        async fetchComments(postId: number) {
+            this.loading = true;
+            try {
+                const response = await fetchComments(postId);
+                if (response.data && Array.isArray(response.data)) {
+                    // 直接使用原始数据，不转换parentId
+                    this.comments = response.data;
+                }
+            } catch (error) {
+                console.error('加载评论失败:', error);
+                this.comments = [];
+                ElMessage.error('加载评论失败');
+            } finally {
+                this.loading = false;
+            }
+        },
+
+        async createComment(postId: number, content: string) {
+            try {
+                const response = await createComment(postId, content)
+                this.comments.unshift(response.data)
+                return response.data
+            } catch (error) {
+                console.error('提交评论失败:', error)
+                throw error
             }
         }
     }

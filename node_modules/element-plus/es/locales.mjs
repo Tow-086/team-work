@@ -31,6 +31,7 @@ export { default as km } from './locale/lang/km.mjs';
 export { default as ko } from './locale/lang/ko.mjs';
 export { default as ku } from './locale/lang/ku.mjs';
 export { default as ky } from './locale/lang/ky.mjs';
+export { default as lo } from './locale/lang/lo.mjs';
 export { default as lt } from './locale/lang/lt.mjs';
 export { default as lv } from './locale/lang/lv.mjs';
 export { default as mg } from './locale/lang/mg.mjs';

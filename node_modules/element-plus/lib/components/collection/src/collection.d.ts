@@ -1,5 +1,4 @@
-import type { InjectionKey } from 'vue';
-import type { SetupContext } from '@vue/runtime-core';
+import type { InjectionKey, SetupContext } from 'vue';
 import type { ElCollectionInjectionContext, ElCollectionItemInjectionContext } from './tokens';
 export declare const COLLECTION_ITEM_SIGN = "data-el-collection-item";
 export declare const createCollectionWithScope: (name: string) => {

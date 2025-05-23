@@ -5,7 +5,7 @@ export { isKorean } from './i18n.mjs';
 export { entriesOf, getProp, keysOf } from './objects.mjs';
 export { cAF, rAF } from './raf.mjs';
 export { generateId, getRandomInt } from './rand.mjs';
-export { capitalize, escapeStringRegexp } from './strings.mjs';
+export { capitalize, escapeStringRegexp, kebabCase } from './strings.mjs';
 export { isBoolean, isElement, isEmpty, isNumber, isPropAbsent, isStringNumber, isUndefined, isWindow } from './types.mjs';
 export { mutable } from './typescript.mjs';
 export { throttleByRaf } from './throttleByRaf.mjs';
@@ -26,5 +26,5 @@ export { isValidComponentSize, isValidDatePickType } from './vue/validator.mjs';
 export { PatchFlags, ensureOnlyChild, flattedChildren, getFirstValidNode, getNormalizedProps, isComment, isFragment, isTemplate, isText, isValidElementNode, renderBlock, renderIf } from './vue/vnode.mjs';
 export { castArray as ensureArray } from 'lodash-unified';
 export { isClient, isIOS } from '@vueuse/core';
-export { NOOP, camelize, hasOwn, hyphenate, isArray, isDate, isFunction, isObject, isPlainObject, isPromise, isString, isSymbol, hyphenate as kebabCase, toRawType } from '@vue/shared';
+export { NOOP, camelize, hasOwn, hyphenate, isArray, isDate, isFunction, isObject, isPlainObject, isPromise, isString, isSymbol, toRawType } from '@vue/shared';
 //# sourceMappingURL=index.mjs.map

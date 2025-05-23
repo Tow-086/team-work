@@ -18,8 +18,8 @@ var ms = {
     datepicker: {
       now: "Sekarang",
       today: "Hari ini",
-      Batal: "Batal",
-      clear: "Jelas",
+      cancel: "Batal",
+      clear: "Padam",
       confirm: "OK",
       dateTablePrompt: "Gunakan kekunci anak panah dan masukkan untuk memilih hari dalam bulan tersebut",
       monthTablePrompt: "Gunakan kekunci anak panah dan masukkan untuk memilih bulan",
@@ -35,7 +35,7 @@ var ms = {
       nextYear: "Tahun Depan",
       prevMonth: "Bulan Sebelumnya",
       nextMonth: "Bulan Depan",
-      year: "tahun",
+      year: "",
       month1: "Januari",
       month2: "Februari",
       month3: "Mac",
@@ -50,13 +50,13 @@ var ms = {
       month12: "Disember",
       week: "minggu",
       weeks: {
-        sun: "Sun",
-        mon: "Mon",
-        tue: "Tue",
-        wed: "Wed",
-        thu: "Thu",
-        fri: "Fri",
-        sat: "Sat"
+        sun: "Ahd",
+        mon: "Isn",
+        tue: "Sel",
+        wed: "Rab",
+        thu: "Kha",
+        fri: "Jum",
+        sat: "Sab"
       },
       weeksFull: {
         sun: "Ahad",
@@ -168,7 +168,7 @@ var ms = {
       error: "FAILED"
     },
     pageHeader: {
-      title: "Belakang"
+      title: "Kembali"
     },
     popconfirm: {
       confirmButtonText: "Ya",

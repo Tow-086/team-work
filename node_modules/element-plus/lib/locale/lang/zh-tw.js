@@ -126,11 +126,11 @@ var zhTw = {
       title: "\u63D0\u793A",
       confirm: "\u78BA\u5B9A",
       cancel: "\u53D6\u6D88",
-      error: "\u8F38\u5165\u7684\u8CC7\u6599\u4E0D\u7B26\u898F\u5B9A!",
+      error: "\u8F38\u5165\u7684\u8CC7\u6599\u4E0D\u7B26\u5408\u898F\u5B9A!",
       close: "\u95DC\u9589\u6B64\u5C0D\u8A71\u6846"
     },
     upload: {
-      deleteTip: "\u6309\u4E00\u4E0B Delete \u9375\u4EE5\u522A\u9664",
+      deleteTip: "\u6309 Delete \u9375\u4EE5\u522A\u9664",
       delete: "\u522A\u9664",
       preview: "\u67E5\u770B\u5716\u7247",
       continue: "\u7E7C\u7E8C\u4E0A\u50B3"

@@ -14,7 +14,7 @@ declare const _default: {
         datepicker: {
             now: string;
             today: string;
-            Batal: string;
+            cancel: string;
             clear: string;
             confirm: string;
             dateTablePrompt: string;

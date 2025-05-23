@@ -2,8 +2,8 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var image$1 = require('./src/image2.js');
-var image = require('./src/image.js');
+var image$1 = require('./src/image.js');
+var image = require('./src/image2.js');
 var install = require('../../utils/vue/install.js');
 
 const ElImage = install.withInstall(image$1["default"]);

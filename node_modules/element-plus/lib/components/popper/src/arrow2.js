@@ -4,7 +4,6 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var vue = require('vue');
 var constants = require('./constants.js');
-var arrow = require('./arrow.js');
 var pluginVue_exportHelper = require('../../../_virtual/plugin-vue_export-helper.js');
 var index = require('../../../hooks/use-namespace/index.js');
 
@@ -14,14 +13,9 @@ const __default__ = vue.defineComponent({
 });
 const _sfc_main = /* @__PURE__ */ vue.defineComponent({
   ...__default__,
-  props: arrow.popperArrowProps,
   setup(__props, { expose }) {
-    const props = __props;
     const ns = index.useNamespace("popper");
-    const { arrowOffset, arrowRef, arrowStyle } = vue.inject(constants.POPPER_CONTENT_INJECTION_KEY, void 0);
-    vue.watch(() => props.arrowOffset, (val) => {
-      arrowOffset.value = val;
-    });
+    const { arrowRef, arrowStyle } = vue.inject(constants.POPPER_CONTENT_INJECTION_KEY, void 0);
     vue.onBeforeUnmount(() => {
       arrowRef.value = void 0;
     });

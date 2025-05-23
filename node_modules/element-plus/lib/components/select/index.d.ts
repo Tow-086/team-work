@@ -10,3 +10,5 @@ export default ElSelect;
 export declare const ElOption: SFCWithInstall<typeof Option>;
 export declare const ElOptionGroup: SFCWithInstall<typeof OptionGroup>;
 export * from './src/token';
+export * from './src/select';
+export type { SelectContext, OptionPublicInstance as SelectOptionProxy, OptionBasic, } from './src/type';

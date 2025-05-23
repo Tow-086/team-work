@@ -7,16 +7,18 @@ var directive = require('./src/directive.js');
 
 const ElLoading = {
   install(app) {
-    app.directive("loading", directive.vLoading);
-    app.config.globalProperties.$loading = service.Loading;
+    service["default"]._context = app._context;
+    directive["default"]._context = app._context;
+    app.directive("loading", directive["default"]);
+    app.config.globalProperties.$loading = service["default"];
   },
-  directive: directive.vLoading,
-  service: service.Loading
+  directive: directive["default"],
+  service: service["default"]
 };
 
-exports.ElLoadingService = service.Loading;
-exports.ElLoadingDirective = directive.vLoading;
-exports.vLoading = directive.vLoading;
+exports.ElLoadingService = service["default"];
+exports.ElLoadingDirective = directive["default"];
+exports.vLoading = directive["default"];
 exports.ElLoading = ElLoading;
 exports["default"] = ElLoading;
 //# sourceMappingURL=index.js.map
