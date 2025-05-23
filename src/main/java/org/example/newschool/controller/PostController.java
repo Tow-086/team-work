@@ -2,6 +2,7 @@
 package org.example.newschool.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.newschool.dto.CommentDTO;
 import org.example.newschool.dto.PostCreateDTO;
 import org.example.newschool.dto.PostResponseDTO;
 import org.example.newschool.entity.Post;
@@ -71,6 +72,23 @@ public class PostController {
 
         postService.toggleLike(id, userId);
         return ResponseEntity.ok("点赞操作成功");
+    }
+    /*发表
+     */
+
+    @PostMapping("/{postId}/createComment")
+    public ResponseEntity<String> createComment(@PathVariable Integer postId, @RequestBody String content) {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        Integer userId = JwtUtil.getUserIdFromToken(request.getHeader("Authorization"));
+
+        postService.createComment(postId, userId, content);
+        return ResponseEntity.ok("发出评论操作成功");
+    }
+
+    @GetMapping("/{postId}/comments")
+    public ResponseEntity<List<CommentDTO>> getCommentsByPostId(@PathVariable Integer postId) {
+        List<CommentDTO> comments = postService.getCommentsByPostId(postId);
+        return ResponseEntity.ok(comments);
     }
 
 

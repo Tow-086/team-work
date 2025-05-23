@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.newschool.dto.CommentDTO;
 import org.example.newschool.dto.PostCreateDTO;
 import org.example.newschool.dto.PostResponseDTO;
+import org.example.newschool.entity.Comment;
 import org.example.newschool.entity.Post;
 import org.example.newschool.entity.User;
 import org.example.newschool.exception.AccountException;
@@ -116,5 +117,35 @@ public class PostServiceImpl implements PostService {
             likeMapper.insertLike(userId, postId);
             postMapper.updateLikeCount(postId, 1); // 增加点赞数
         }
+    }
+
+    @Override
+    public void createComment(Integer postId, Integer userId, String content) {
+        // 快速校验
+        if (content == null || content.trim().isEmpty()) {
+            throw new IllegalArgumentException("评论内容不能为空");
+        }
+        // 构造Comment对象
+        Comment comment = new Comment();
+        comment.setPostId(postId);
+        comment.setUserId(userId);
+        comment.setContent(content.trim());
+        comment.setParentId(0); // 默认顶级评论
+        comment.setLikeCount(0);
+        comment.setCreatedAt(new Date());
+
+        // 插入数据库
+        try {
+            commentMapper.insert(comment);
+        } catch (Exception e) {
+            throw new RuntimeException("评论发布失败，请检查数据有效性", e);
+        }
+
+    }
+
+    // PostServiceImpl.java
+    @Override
+    public List<CommentDTO> getCommentsByPostId(Integer postId) {
+        return commentMapper.findByPostId(postId);
     }
 }

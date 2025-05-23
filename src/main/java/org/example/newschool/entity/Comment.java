@@ -13,12 +13,19 @@ public class Comment {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id", nullable = false)
+    @JoinColumn(name = "post_id", nullable = false, insertable = false, updatable = false)
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    // MyBatis直接操作的字段（新增）
+    @Column(name = "post_id")
+    private Integer postId;
+
+    @Column(name = "user_id", insertable = false, updatable = false)
+    private Integer userId;
 
     @Column(length = 65535, nullable = false)
     private String content;
